@@ -196,6 +196,34 @@ const vapeProducts: VapeProduct[] = [
       { name: 'Blue Razz Ice', inStock: true },
       { name: 'Orange Mango', inStock: true },
     ]
+  },
+  {
+    id: 'razz_mega',
+    name: 'Razz Mega',
+    puffs: '9,000',
+    price: '$15.00',
+    imageName: 'razz',
+    flavors: [
+      { name: 'Dragon Fruit Lemonade', inStock: true },
+      { name: 'Tiffany', inStock: true },
+      { name: 'Black Cherry Peach', inStock: true },
+      { name: 'Strawberry Orange Mango', inStock: true },
+      { name: 'Day Crawler', inStock: true },
+      { name: 'Night Crawler', inStock: true },
+      { name: 'Blueberry Watermelon', inStock: true },
+      { name: 'Cactus Jack', inStock: true },
+      { name: 'Mango Colada', inStock: true },
+      { name: 'Peach Grapefruit', inStock: true },
+      { name: 'Strawberry Watermelon', inStock: true },
+      { name: 'Watermelon Ice', inStock: true },
+      { name: 'Graham Twist', inStock: true },
+      { name: 'Miami Mint', inStock: true },
+      { name: 'Black Cherry Kiwi', inStock: true },
+      { name: 'Georgia Peach', inStock: true },
+      { name: 'Blue Razz B Pop', inStock: true },
+      { name: 'White Gummy Watermelon', inStock: true },
+      { name: 'White Yummy Grape', inStock: true },
+    ]
   }
 ]
 

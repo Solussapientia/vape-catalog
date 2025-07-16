@@ -1,6 +1,6 @@
 # VAPE LIST - Mobile-First Vape Store
 
-A modern, mobile-friendly vape store catalog built with Next.js and HeroUI.
+A modern, mobile-friendly https://github.com/Solussapientia/vape-catalogvape store catalog built with Next.js and HeroUI.
 
 ## Features
 
