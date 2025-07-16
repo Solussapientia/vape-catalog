@@ -347,7 +347,7 @@ const vapeProducts: VapeProduct[] = [
     name: 'Viho Supercharge Pro',
     puffs: '20,000',
     price: '$20.00',
-    imageName: 'SP',
+    imageName: 'SP.jpg',
     flavors: [
       { name: 'White Peach Razz', inStock: true },
       { name: 'Strawberry Colada', inStock: true },
@@ -358,6 +358,30 @@ const vapeProducts: VapeProduct[] = [
       { name: 'Tobacco Mint', inStock: true },
       { name: 'Orange Splash', inStock: true },
       { name: 'Sour Apple Fcucking Fab', inStock: true },
+    ]
+  },
+  {
+    id: 'viho_s',
+    name: 'Viho Supercharge',
+    puffs: '20,000',
+    price: '$20.00',
+    imageName: 'S.jpg',
+    flavors: [
+      { name: 'Blueberry Pom', inStock: true },
+      { name: 'Rainbow Candy', inStock: true },
+      { name: 'Icy Mint', inStock: true },
+      { name: 'Sour Apple Ice', inStock: true },
+      { name: 'Lemon Pie', inStock: true },
+      { name: 'Raspberry Orange', inStock: true },
+      { name: 'Blueberry Ice', inStock: true },
+      { name: '6ixty Nine', inStock: true },
+      { name: 'Mango Magic', inStock: true },
+      { name: 'Pineapple Apple Pear', inStock: true },
+      { name: 'Clear', inStock: true },
+      { name: 'Strawberry Mango', inStock: true },
+      { name: 'Georgia Peach', inStock: true },
+      { name: 'Triple Apple', inStock: true },
+      { name: 'Grape Ice', inStock: true },
     ]
   }
 ]
@@ -381,7 +405,7 @@ export default function Home() {
               <CardHeader className="flex flex-col gap-4 pb-4">
                 <div className="w-full aspect-square relative border-2 border-gray-600 rounded-lg overflow-hidden bg-gray-800">
                   <Image
-                    src={`/${product.imageName}.webp`}
+                    src={`/${product.imageName}${product.imageName.includes('.') ? '' : '.webp'}`}
                     alt={product.name}
                     fill
                     className="object-cover"
