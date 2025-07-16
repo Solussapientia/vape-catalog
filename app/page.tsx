@@ -175,12 +175,12 @@ export default function Home() {
           {vapeProducts.map((product) => (
             <Card key={product.id} className="bg-gray-900 border-gray-800">
               <CardHeader className="flex flex-col gap-4 pb-4">
-                <div className="w-full h-48 relative">
+                <div className="w-full h-48 relative border-2 border-gray-600 rounded-lg p-2 bg-gray-800">
                   <Image
                     src={`/${product.imageName}.webp`}
                     alt={product.name}
                     fill
-                    className="object-contain rounded-lg"
+                    className="object-contain rounded-md"
                   />
                 </div>
                 <div className="flex flex-col text-center">
