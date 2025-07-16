@@ -424,6 +424,37 @@ const vapeProducts: VapeProduct[] = [
       { name: 'La Mint', inStock: true },
       { name: 'Peach Lemon', inStock: true },
     ]
+  },
+  {
+    id: 'hyde_3300',
+    name: 'Hyde Rechargeable 3300',
+    puffs: '3,300',
+    price: '$10.00',
+    imageName: 'hyde',
+    flavors: [
+      { name: 'Minty O', inStock: true },
+      { name: 'Blue Razz', inStock: true },
+      { name: 'Mango Peaches and Cream', inStock: true },
+      { name: 'Pineapple Ice', inStock: true },
+      { name: 'Cherry Peach Lemonade', inStock: true },
+      { name: 'Summer Luv', inStock: true },
+      { name: 'Sour Apple Ice', inStock: true },
+      { name: 'Power', inStock: true },
+      { name: 'Raspberry Watermelon', inStock: true },
+      { name: 'Aloe Grape', inStock: true },
+      { name: 'Peachy', inStock: true },
+      { name: 'Strawberry Orange Ice', inStock: true },
+      { name: 'OJ', inStock: true },
+      { name: 'Pink Lemonade', inStock: true },
+      { name: 'Lush Ice', inStock: true },
+      { name: 'Peach Mango Watermelon', inStock: true },
+      { name: 'Strawberry Kiwi', inStock: true },
+      { name: 'Banana Ice', inStock: true },
+      { name: 'Pina Colada', inStock: true },
+      { name: 'Strawberry Banana', inStock: true },
+      { name: 'Strawberry Ice Cream', inStock: true },
+      { name: 'Tropical', inStock: true },
+    ]
   }
 ]
 
