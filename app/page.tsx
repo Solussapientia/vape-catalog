@@ -292,6 +292,41 @@ const vapeProducts: VapeProduct[] = [
       { name: 'Summer Grape', inStock: true },
       { name: 'Yellow Lemon', inStock: true },
     ]
+  },
+  {
+    id: 'mo5000',
+    name: 'Lost Mary MO5000',
+    puffs: '5,000',
+    price: '$10.00',
+    imageName: 'mo5000',
+    flavors: [
+      { name: 'Pineapple Apple Pear', inStock: true },
+      { name: 'Kiwi Fuse', inStock: true },
+      { name: 'Kiwi Dragon Duo Ice', inStock: true },
+      { name: 'Strawberry Watermelon Ice', inStock: true },
+      { name: 'Black Cherry Melon', inStock: true },
+      { name: 'Mango Peach', inStock: true },
+      { name: 'Kiwi Honey Dew Apple', inStock: true },
+      { name: 'Hawaii Juice', inStock: true },
+      { name: 'Mango Peach Watermelon', inStock: true },
+      { name: 'Blue Trio', inStock: true },
+      { name: 'White Strawberry Ice', inStock: true },
+      { name: 'Blueberry Raspberry Lemon', inStock: true },
+      { name: 'Triple Berry Ice', inStock: true },
+      { name: 'Strawberry Kiwi Ice', inStock: true },
+      { name: 'Kiwi Dragonfruit Berry Ice', inStock: true },
+      { name: 'Watermelon Cherry', inStock: true },
+      { name: 'Berry Rose Duo Ice', inStock: true },
+      { name: 'Pure', inStock: true },
+      { name: 'Fuji Duo Ice', inStock: true },
+      { name: 'Gami', inStock: true },
+      { name: 'Guava Ice', inStock: true },
+      { name: 'Grape Cloudo', inStock: true },
+      { name: 'Black Duo Ice', inStock: true },
+      { name: 'Banana Raspberry Ice', inStock: true },
+      { name: 'Cherry Lemon', inStock: true },
+      { name: 'Cherry Blossom Grape', inStock: true },
+    ]
   }
 ]
 
