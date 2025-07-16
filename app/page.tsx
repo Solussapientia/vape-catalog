@@ -20,6 +20,16 @@ interface VapeProduct {
 
 const vapeProducts: VapeProduct[] = [
   {
+    id: 'meloso',
+    name: 'Geek Bar Meloso',
+    puffs: '30,000',
+    price: '$25 or 2 for $40',
+    imageName: 'meloso',
+    flavors: [
+      { name: 'Stone Freeze', inStock: true },
+    ]
+  },
+  {
     id: 'ria',
     name: 'Geek Bar Ria',
     puffs: '30,000',
