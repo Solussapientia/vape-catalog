@@ -262,6 +262,36 @@ const vapeProducts: VapeProduct[] = [
       { name: 'Pineapple Ice', inStock: true },
       { name: 'Scarry Berry', inStock: true },
     ]
+  },
+  {
+    id: 'lmmt15000',
+    name: 'Lost Mary MT15000 Turbo',
+    puffs: '15,000',
+    price: '$15.00',
+    imageName: 'LMMT',
+    flavors: [
+      { name: 'Grape Jelly', inStock: true },
+      { name: 'Tropical Baja Splash', inStock: true },
+      { name: 'Wild Berry Baja Splash', inStock: true },
+      { name: 'Acai Storm Ice', inStock: true },
+      { name: 'Hawaii Juice', inStock: true },
+      { name: 'Refresh Fcucking Fab', inStock: true },
+      { name: 'Peach Blue Slushy', inStock: true },
+      { name: 'Sour Strawberry Peach', inStock: true },
+      { name: 'Green Apple Lime', inStock: true },
+      { name: 'Berry Burst', inStock: true },
+      { name: 'Pacific Cooler', inStock: true },
+      { name: 'Blueberry Raspberry Lemon', inStock: true },
+      { name: 'Grape Apple', inStock: true },
+      { name: 'Rainbow Bubblegum', inStock: true },
+      { name: 'Grapefruit Berries', inStock: true },
+      { name: 'Red Strawberry', inStock: true },
+      { name: 'Purple Passion Punch', inStock: true },
+      { name: 'Raspberry Watermelon', inStock: true },
+      { name: 'Citrus Sunrise', inStock: true },
+      { name: 'Summer Grape', inStock: true },
+      { name: 'Yellow Lemon', inStock: true },
+    ]
   }
 ]
 
