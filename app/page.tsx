@@ -174,19 +174,19 @@ export default function Home() {
         <div className="space-y-6">
           {vapeProducts.map((product) => (
             <Card key={product.id} className="bg-gray-900 border-gray-800">
-              <CardHeader className="flex gap-3 pb-2">
-                <div className="flex-shrink-0 w-16 h-16 relative">
+              <CardHeader className="flex flex-col gap-4 pb-4">
+                <div className="w-full h-48 relative">
                   <Image
                     src={`/${product.imageName}.webp`}
                     alt={product.name}
                     fill
-                    className="object-cover rounded-lg"
+                    className="object-contain rounded-lg"
                   />
                 </div>
-                <div className="flex flex-col flex-1">
-                  <p className="text-lg font-semibold text-white">{product.name}</p>
-                  <p className="text-sm text-gray-400">{product.puffs} puffs</p>
-                  <p className="text-sm font-medium text-green-400">{product.price}</p>
+                <div className="flex flex-col text-center">
+                  <p className="text-xl font-semibold text-white mb-1">{product.name}</p>
+                  <p className="text-base text-gray-400 mb-1">{product.puffs} puffs</p>
+                  <p className="text-lg font-medium text-green-400">{product.price}</p>
                 </div>
               </CardHeader>
               <CardBody className="pt-0">
