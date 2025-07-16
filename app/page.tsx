@@ -327,6 +327,20 @@ const vapeProducts: VapeProduct[] = [
       { name: 'Cherry Lemon', inStock: true },
       { name: 'Cherry Blossom Grape', inStock: true },
     ]
+  },
+  {
+    id: 'losgal',
+    name: 'Los Gal by Lost Mary',
+    puffs: '25,000',
+    price: '$15',
+    imageName: 'losgal',
+    flavors: [
+      { name: 'Watermelon Ice', inStock: true },
+      { name: 'Strawberry Orange Pineapple', inStock: true },
+      { name: 'Triple Berry', inStock: true },
+      { name: 'Orange Mango Guava', inStock: true },
+      { name: 'Sour Apple Grape Kiwi', inStock: true },
+    ]
   }
 ]
 
