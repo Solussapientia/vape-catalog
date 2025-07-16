@@ -1,0 +1,505 @@
+import { supabase } from '../lib/supabase'
+
+// Current vape products data
+const vapeProducts = [
+  {
+    id: 'ria',
+    name: 'Geek Bar Ria',
+    puffs: '30,000',
+    price: '$25.00 or 2 for $40',
+    imageName: 'ria',
+    flavors: [
+      { name: 'Sour Strawberry Dragon', inStock: true },
+      { name: 'Miami Mint', inStock: true },
+      { name: 'Blue Razz Ice', inStock: true },
+      { name: 'Fcuking Fab', inStock: true },
+      { name: 'Pineapple Lime', inStock: true },
+      { name: 'Dualicuous', inStock: true },
+      { name: 'Pink Razz Lemonade', inStock: true },
+      { name: 'Blueberry Punch', inStock: true },
+      { name: 'Peach Gummy', inStock: true },
+      { name: 'Crazy Berry', inStock: true },
+      { name: 'Watermelon Ice', inStock: true },
+    ]
+  },
+  {
+    id: 'skyview',
+    name: 'Digiflavor Skyview',
+    puffs: '25,000',
+    price: '$20.00',
+    imageName: 'skyview',
+    flavors: [
+      { name: 'Skywalker', inStock: true },
+      { name: 'Strawberry Ice', inStock: true },
+      { name: 'Triple Berry', inStock: true },
+      { name: 'Miami Mint', inStock: true },
+      { name: 'Sour Apple Ice', inStock: true },
+      { name: 'Peach Blue Slushy', inStock: true },
+      { name: 'Strawberry Watermelon Coconut', inStock: true },
+      { name: 'Cherry Lemon Mint', inStock: true },
+    ]
+  },
+  {
+    id: 'pulse_x',
+    name: 'Geek Bar Pulse X',
+    puffs: '25,000 (Regular) / 15,000 (Pulse)',
+    price: '$25 or 2 for $40',
+    imageName: 'pulse_x',
+    flavors: [
+      { name: 'ATL Mint (Meteor / Patriot Edition)', inStock: false },
+      { name: 'Banana Taffy Freeze', inStock: false },
+      { name: 'Blackberry Blueberry', inStock: false },
+      { name: 'Blackberry B‑Pop', inStock: false },
+      { name: 'Blue Rancher', inStock: false },
+      { name: 'Blue Razz Ice', inStock: false },
+      { name: 'Cool Mint', inStock: false },
+      { name: 'Cola Slush (Slush Edition)', inStock: false },
+      { name: 'Grape Slush (Slush Edition)', inStock: false },
+      { name: 'Orange Slush (Slush Edition)', inStock: false },
+      { name: 'Peach Perfect Slush (Slush Edition)', inStock: false },
+      { name: 'Wild Cherry Slush (Slush Edition)', inStock: false },
+      { name: 'Grapefruit Refresher', inStock: false },
+      { name: 'Lemon Heads', inStock: false },
+      { name: 'Lime Berry Orange', inStock: false },
+      { name: 'Miami Mint', inStock: false },
+      { name: 'Orange Dragon (Meteor Edition)', inStock: false },
+      { name: 'Orange Fcuking Fab', inStock: false },
+      { name: 'Pink & Blue (Meteor Edition)', inStock: false },
+      { name: 'Punch (Platinum Edition)', inStock: false },
+      { name: 'Raspberry Peach Lime', inStock: false },
+      { name: 'Sour Apple Ice', inStock: false },
+      { name: 'Sour Fcuking Fab', inStock: false },
+      { name: 'Sour Mango Pineapple', inStock: false },
+      { name: 'Sour Straws', inStock: false },
+      { name: 'Strawberry B‑Pop', inStock: false },
+      { name: 'Strawberry Colada', inStock: false },
+      { name: 'Strawberry Kiwi Ice (Meteor Edition)', inStock: false },
+      { name: 'Strawberry Watermelon (Meteor Edition)', inStock: false },
+      { name: 'Watermelon Ice', inStock: false },
+      { name: 'White Peach Raspberry', inStock: false },
+      { name: 'Strawberry Jam (Jam Edition)', inStock: false },
+      { name: 'Blueberry Jam (Jam Edition)', inStock: false },
+      { name: 'Raspberry Jam (Jam Edition)', inStock: false },
+      { name: 'Peach Jam (Jam Edition)', inStock: false },
+      { name: 'Orange Jam (Jam Edition)', inStock: false },
+    ]
+  },
+  {
+    id: 'pulse',
+    name: 'Geek Bar Pulse',
+    puffs: '15,000 (Regular) / 7,500 (Pulse)',
+    price: '$20 or 2 for $35',
+    imageName: 'pulse',
+    flavors: [
+      { name: 'Sour Cranapple', inStock: true },
+      { name: 'Creamy Mintz', inStock: true },
+      { name: 'Black Mintz', inStock: true },
+      { name: 'Stone Mintz', inStock: true },
+      { name: 'Icy Mintz', inStock: true },
+      { name: 'Watermelon Ice', inStock: false },
+      { name: 'Fcuking FAB', inStock: false },
+      { name: 'Wild Berry Savers', inStock: false },
+      { name: 'Strawberry Savers', inStock: false },
+      { name: 'Pineapple Savers', inStock: false },
+      { name: 'Orange Mint Savers', inStock: false },
+      { name: 'Spooky Vanilla', inStock: false },
+      { name: 'Sour Gush', inStock: false },
+      { name: 'Sour Blue Dust', inStock: false },
+      { name: 'Sour Strawberry', inStock: false },
+      { name: 'Sour Watermelon Drop', inStock: false },
+      { name: 'Frozen Strawberry', inStock: false },
+      { name: 'Frozen Pina Colada', inStock: false },
+      { name: 'Frozen Cherry Apple', inStock: false },
+      { name: 'Frozen Blackberry Fab', inStock: false },
+      { name: 'Frozen Watermelon', inStock: false },
+      { name: 'Frozen White Grape', inStock: false },
+      { name: 'Sour Apple B‑Pop', inStock: false },
+      { name: 'Grape Lemon', inStock: false },
+      { name: 'Orange Creamsicle', inStock: false },
+      { name: 'Dragon Melon', inStock: false },
+      { name: 'OMG B‑Pop', inStock: false },
+      { name: 'Grape B‑Pop', inStock: false },
+      { name: 'Crazy Melon', inStock: false },
+      { name: 'Black Cherry', inStock: false },
+      { name: 'Blueberry Watermelon', inStock: false },
+      { name: 'Berry Bliss', inStock: false },
+      { name: 'Cherry Bomb', inStock: false },
+      { name: 'Cool Mint', inStock: false },
+      { name: 'Blue Razz Ice', inStock: false },
+      { name: 'Miami Mint', inStock: false },
+      { name: 'Pink Lemonade', inStock: false },
+      { name: 'Mexico Mango', inStock: false },
+      { name: 'Juicy Peach Ice', inStock: false },
+      { name: 'Meta Moon', inStock: false },
+      { name: 'California Cherry', inStock: false },
+      { name: 'Blue Mint', inStock: false },
+    ]
+  },
+  {
+    id: 'meloso',
+    name: 'Geek Bar Meloso',
+    puffs: '30,000',
+    price: '$25 or 2 for $40',
+    imageName: 'meloso',
+    flavors: [
+      { name: 'Stone Freeze', inStock: true },
+    ]
+  },
+  {
+    id: 'ltx',
+    name: 'Razz LTX',
+    puffs: '25,000',
+    price: '$20',
+    imageName: 'LTX',
+    flavors: [
+      { name: 'Orange Pineapple Punch', inStock: true },
+      { name: 'Orange Berry Lime Ice', inStock: true },
+      { name: 'Frozen Cherry Apple', inStock: true },
+      { name: 'Clear', inStock: true },
+      { name: 'Tobacco', inStock: true },
+      { name: 'Cherry Strapple', inStock: true },
+      { name: 'Strawberry Orange Tang', inStock: true },
+      { name: 'Black & Blue Lime', inStock: true },
+      { name: 'Clear Sapphire', inStock: true },
+      { name: 'Fire & Ice', inStock: true },
+      { name: 'Pink Lemonade Minty O\'s', inStock: true },
+      { name: 'Watermelon Ice', inStock: true },
+      { name: 'Iced Blue Dragon', inStock: true },
+      { name: 'Sour Watermelon Peach', inStock: true },
+      { name: 'Frozen Banana', inStock: true },
+      { name: 'Rainbow Rain', inStock: true },
+      { name: 'Miami Mint', inStock: true },
+      { name: 'Raspberry Limeade', inStock: true },
+      { name: 'Strawberry Kiwi Pear', inStock: true },
+      { name: 'Sour Apple Watermelon', inStock: true },
+      { name: 'Sour Apple Ice', inStock: true },
+      { name: 'Frozen Raspberry Watermelon', inStock: true },
+      { name: 'Frozen Dragonfruit Lemon', inStock: true },
+      { name: 'Bangin Sour Berries', inStock: true },
+      { name: 'Blue Razz Ice', inStock: true },
+      { name: 'Orange Mango', inStock: true },
+    ]
+  },
+  {
+    id: 'razz_mega',
+    name: 'Razz Mega',
+    puffs: '9,000',
+    price: '$15.00',
+    imageName: 'razz',
+    flavors: [
+      { name: 'Dragon Fruit Lemonade', inStock: true },
+      { name: 'Tiffany', inStock: true },
+      { name: 'Black Cherry Peach', inStock: true },
+      { name: 'Strawberry Orange Mango', inStock: true },
+      { name: 'Day Crawler', inStock: true },
+      { name: 'Night Crawler', inStock: true },
+      { name: 'Blueberry Watermelon', inStock: true },
+      { name: 'Cactus Jack', inStock: true },
+      { name: 'Mango Colada', inStock: true },
+      { name: 'Peach Grapefruit', inStock: true },
+      { name: 'Strawberry Watermelon', inStock: true },
+      { name: 'Watermelon Ice', inStock: true },
+      { name: 'Graham Twist', inStock: true },
+      { name: 'Miami Mint', inStock: true },
+      { name: 'Black Cherry Kiwi', inStock: true },
+      { name: 'Georgia Peach', inStock: true },
+      { name: 'Blue Razz B Pop', inStock: true },
+      { name: 'White Gummy Watermelon', inStock: true },
+      { name: 'White Yummy Grape', inStock: true },
+    ]
+  },
+  {
+    id: 'lm20000',
+    name: 'Lost Mary MO20000',
+    puffs: '20,000',
+    price: '$20.00',
+    imageName: 'LM20000',
+    flavors: [
+      { name: 'Tropical Punch', inStock: true },
+      { name: 'Orange Pomegranate Cranberry', inStock: true },
+      { name: 'Strawberry Kiwi', inStock: true },
+      { name: 'Arizona Ice Tea', inStock: true },
+      { name: 'Pure Ice', inStock: true },
+      { name: 'Dragon Drink', inStock: true },
+      { name: 'Blue Razz Ice', inStock: true },
+      { name: 'Miami Mint', inStock: true },
+      { name: 'Grape Jelly', inStock: true },
+      { name: 'Sour Strawberry Dragon', inStock: true },
+      { name: 'Sour Apple Ice', inStock: true },
+      { name: 'Watermelon Sour Peach', inStock: true },
+      { name: 'Strawberry Ice', inStock: true },
+      { name: 'Peach +', inStock: true },
+      { name: 'Rocket Popsicle', inStock: true },
+      { name: 'Pure', inStock: true },
+      { name: 'Lime Grapefruit', inStock: true },
+      { name: 'Pear Drop', inStock: true },
+      { name: 'Luxury Tobacco', inStock: true },
+      { name: 'Red Wave', inStock: true },
+      { name: 'Pina Colada', inStock: true },
+      { name: 'Blue Baja Splash', inStock: true },
+      { name: 'Mountain Berry', inStock: true },
+      { name: 'Deep Purple', inStock: true },
+      { name: 'Hawaiian Popsicle', inStock: true },
+      { name: 'Peppermint', inStock: true },
+      { name: 'Rainbow Sherbert', inStock: true },
+      { name: 'Pineapple Ice', inStock: true },
+      { name: 'Scarry Berry', inStock: true },
+    ]
+  },
+  {
+    id: 'lmmt15000',
+    name: 'Lost Mary MT15000 Turbo',
+    puffs: '15,000',
+    price: '$15.00',
+    imageName: 'LMMT',
+    flavors: [
+      { name: 'Grape Jelly', inStock: true },
+      { name: 'Tropical Baja Splash', inStock: true },
+      { name: 'Wild Berry Baja Splash', inStock: true },
+      { name: 'Acai Storm Ice', inStock: true },
+      { name: 'Hawaii Juice', inStock: true },
+      { name: 'Refresh Fcucking Fab', inStock: true },
+      { name: 'Peach Blue Slushy', inStock: true },
+      { name: 'Sour Strawberry Peach', inStock: true },
+      { name: 'Green Apple Lime', inStock: true },
+      { name: 'Berry Burst', inStock: true },
+      { name: 'Pacific Cooler', inStock: true },
+      { name: 'Blueberry Raspberry Lemon', inStock: true },
+      { name: 'Grape Apple', inStock: true },
+      { name: 'Rainbow Bubblegum', inStock: true },
+      { name: 'Grapefruit Berries', inStock: true },
+      { name: 'Red Strawberry', inStock: true },
+      { name: 'Purple Passion Punch', inStock: true },
+      { name: 'Raspberry Watermelon', inStock: true },
+      { name: 'Citrus Sunrise', inStock: true },
+      { name: 'Summer Grape', inStock: true },
+      { name: 'Yellow Lemon', inStock: true },
+    ]
+  },
+  {
+    id: 'mo5000',
+    name: 'Lost Mary MO5000',
+    puffs: '5,000',
+    price: '$10.00',
+    imageName: 'mo5000',
+    flavors: [
+      { name: 'Pineapple Apple Pear', inStock: true },
+      { name: 'Kiwi Fuse', inStock: true },
+      { name: 'Kiwi Dragon Duo Ice', inStock: true },
+      { name: 'Strawberry Watermelon Ice', inStock: true },
+      { name: 'Black Cherry Melon', inStock: true },
+      { name: 'Mango Peach', inStock: true },
+      { name: 'Kiwi Honey Dew Apple', inStock: true },
+      { name: 'Hawaii Juice', inStock: true },
+      { name: 'Mango Peach Watermelon', inStock: true },
+      { name: 'Blue Trio', inStock: true },
+      { name: 'White Strawberry Ice', inStock: true },
+      { name: 'Blueberry Raspberry Lemon', inStock: true },
+      { name: 'Triple Berry Ice', inStock: true },
+      { name: 'Strawberry Kiwi Ice', inStock: true },
+      { name: 'Kiwi Dragonfruit Berry Ice', inStock: true },
+      { name: 'Watermelon Cherry', inStock: true },
+      { name: 'Berry Rose Duo Ice', inStock: true },
+      { name: 'Pure', inStock: true },
+      { name: 'Fuji Duo Ice', inStock: true },
+      { name: 'Gami', inStock: true },
+      { name: 'Guava Ice', inStock: true },
+      { name: 'Grape Cloudo', inStock: true },
+      { name: 'Black Duo Ice', inStock: true },
+      { name: 'Banana Raspberry Ice', inStock: true },
+      { name: 'Cherry Lemon', inStock: true },
+      { name: 'Cherry Blossom Grape', inStock: true },
+    ]
+  },
+  {
+    id: 'losgal',
+    name: 'Los Gal by Lost Mary',
+    puffs: '25,000',
+    price: '$15',
+    imageName: 'losgal',
+    flavors: [
+      { name: 'Watermelon Ice', inStock: true },
+      { name: 'Strawberry Orange Pineapple', inStock: true },
+      { name: 'Triple Berry', inStock: true },
+      { name: 'Orange Mango Guava', inStock: true },
+      { name: 'Sour Apple Grape Kiwi', inStock: true },
+    ]
+  },
+  {
+    id: 'viho_sp',
+    name: 'Viho Supercharge Pro',
+    puffs: '20,000',
+    price: '$20.00',
+    imageName: 'SP.jpg',
+    flavors: [
+      { name: 'White Peach Razz', inStock: true },
+      { name: 'Strawberry Colada', inStock: true },
+      { name: 'Smooth Tobacco', inStock: true },
+      { name: 'Peach Rings', inStock: true },
+      { name: 'Strawberry Ice', inStock: true },
+      { name: 'Sour Apple Ice', inStock: true },
+      { name: 'Tobacco Mint', inStock: true },
+      { name: 'Orange Splash', inStock: true },
+      { name: 'Sour Apple Fcucking Fab', inStock: true },
+    ]
+  },
+  {
+    id: 'viho_s',
+    name: 'Viho Supercharge',
+    puffs: '20,000',
+    price: '$20.00',
+    imageName: 'S.jpg',
+    flavors: [
+      { name: 'Blueberry Pom', inStock: true },
+      { name: 'Rainbow Candy', inStock: true },
+      { name: 'Icy Mint', inStock: true },
+      { name: 'Sour Apple Ice', inStock: true },
+      { name: 'Lemon Pie', inStock: true },
+      { name: 'Raspberry Orange', inStock: true },
+      { name: 'Blueberry Ice', inStock: true },
+      { name: '6ixty Nine', inStock: true },
+      { name: 'Mango Magic', inStock: true },
+      { name: 'Pineapple Apple Pear', inStock: true },
+      { name: 'Clear', inStock: true },
+      { name: 'Strawberry Mango', inStock: true },
+      { name: 'Georgia Peach', inStock: true },
+      { name: 'Triple Apple', inStock: true },
+      { name: 'Grape Ice', inStock: true },
+    ]
+  },
+  {
+    id: 'viho_turbo',
+    name: 'Viho Turbo',
+    puffs: '10,000',
+    price: '$15.00',
+    imageName: 'T',
+    flavors: [
+      { name: 'Blue Power', inStock: true },
+      { name: 'Banana Icy', inStock: true },
+      { name: 'Passion Fruit Icy', inStock: true },
+      { name: 'Watermelon Cactus Jack', inStock: true },
+      { name: 'Watermelon Bubble Gum', inStock: true },
+      { name: 'White Gummy', inStock: true },
+      { name: 'Coconut Pineapple', inStock: true },
+      { name: 'Strawberry Raspberry', inStock: true },
+      { name: 'Watermelon Icy', inStock: true },
+      { name: 'Raspberry Watermelon', inStock: true },
+      { name: 'Blue Razz Icy', inStock: true },
+      { name: 'Cherry Berry', inStock: true },
+      { name: 'Cherry Lemon', inStock: true },
+      { name: 'Strawberry Banana', inStock: true },
+      { name: 'Frozen Tundra', inStock: true },
+      { name: 'Sour Apple Icy', inStock: true },
+      { name: 'Strawberry Ice', inStock: true },
+      { name: 'Strawberry Kiwi', inStock: true },
+      { name: 'Peach Icy', inStock: true },
+      { name: 'Pink Lemonade', inStock: true },
+      { name: 'Sour Apple Watermelon', inStock: true },
+      { name: 'Peppermint Cream', inStock: true },
+      { name: 'Mango Icy', inStock: true },
+      { name: 'Grape Ice', inStock: true },
+      { name: 'Sour Raspberry Bubblegum', inStock: true },
+      { name: 'Glazed Donut', inStock: true },
+      { name: 'Glacier O Real', inStock: true },
+      { name: 'Tropical Melon', inStock: true },
+      { name: 'Rainbow Pop', inStock: true },
+      { name: 'Popping Candy', inStock: true },
+      { name: 'La Mint', inStock: true },
+      { name: 'Peach Lemon', inStock: true },
+    ]
+  },
+  {
+    id: 'hyde_3300',
+    name: 'Hyde Rechargeable 3300',
+    puffs: '3,300',
+    price: '$10.00',
+    imageName: 'hyde',
+    flavors: [
+      { name: 'Minty O', inStock: true },
+      { name: 'Blue Razz', inStock: true },
+      { name: 'Mango Peaches and Cream', inStock: true },
+      { name: 'Pineapple Ice', inStock: true },
+      { name: 'Cherry Peach Lemonade', inStock: true },
+      { name: 'Summer Luv', inStock: true },
+      { name: 'Sour Apple Ice', inStock: true },
+      { name: 'Power', inStock: true },
+      { name: 'Raspberry Watermelon', inStock: true },
+      { name: 'Aloe Grape', inStock: true },
+      { name: 'Peachy', inStock: true },
+      { name: 'Strawberry Orange Ice', inStock: true },
+      { name: 'OJ', inStock: true },
+      { name: 'Pink Lemonade', inStock: true },
+      { name: 'Lush Ice', inStock: true },
+      { name: 'Peach Mango Watermelon', inStock: true },
+      { name: 'Strawberry Kiwi', inStock: true },
+      { name: 'Banana Ice', inStock: true },
+      { name: 'Pina Colada', inStock: true },
+      { name: 'Strawberry Banana', inStock: true },
+      { name: 'Strawberry Ice Cream', inStock: true },
+      { name: 'Tropical', inStock: true },
+    ]
+  }
+]
+
+async function populateDatabase() {
+  try {
+    console.log('Starting database population...')
+    
+    // Insert products
+    for (const product of vapeProducts) {
+      const { error: productError } = await supabase
+        .from('products')
+        .upsert({
+          id: product.id,
+          name: product.name,
+          puffs: product.puffs,
+          price: product.price,
+          image_name: product.imageName,
+        })
+      
+      if (productError) {
+        console.error(`Error inserting product ${product.name}:`, productError)
+        continue
+      }
+      
+      console.log(`✓ Inserted product: ${product.name}`)
+      
+      // Insert flavors for this product
+      for (const flavor of product.flavors) {
+        const { error: flavorError } = await supabase
+          .from('flavors')
+          .upsert({
+            product_id: product.id,
+            name: flavor.name,
+            in_stock: flavor.inStock,
+          })
+        
+        if (flavorError) {
+          console.error(`Error inserting flavor ${flavor.name}:`, flavorError)
+        }
+      }
+      
+      console.log(`✓ Inserted ${product.flavors.length} flavors for ${product.name}`)
+    }
+    
+    console.log('✅ Database population completed!')
+    
+    // Verify the data
+    const { data: productCount } = await supabase
+      .from('products')
+      .select('*', { count: 'exact' })
+    
+    const { data: flavorCount } = await supabase
+      .from('flavors')
+      .select('*', { count: 'exact' })
+    
+    console.log(`📊 Total products: ${productCount?.length || 0}`)
+    console.log(`📊 Total flavors: ${flavorCount?.length || 0}`)
+    
+  } catch (error) {
+    console.error('Error populating database:', error)
+  }
+}
+
+// Run the population script
+populateDatabase() 
