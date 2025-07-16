@@ -9,6 +9,29 @@ interface VapeProduct extends Product {
   flavors: Flavor[]
 }
 
+// Map database image names to actual filenames in public folder
+function getImagePath(imageName: string): string {
+  const imageMap: { [key: string]: string } = {
+    'ria': '/ria.webp',
+    'skyview': '/skyview.webp', 
+    'pulse_x': '/pulse_x.webp',
+    'pulse': '/pulse.webp',
+    'meloso': '/meloso.webp',
+    'LTX': '/LTX.webp',
+    'razz': '/razz.webp',
+    'LM20000': '/LM20000.webp',
+    'LMMT': '/LMMT.webp',
+    'mo5000': '/mo5000.webp',
+    'losgal': '/losgal.webp',
+    'SP.jpg': '/SP.jpg',
+    'S.jpg': '/S.jpg',
+    'T': '/T.webp',
+    'hyde': '/hyde.webp'
+  }
+  
+  return imageMap[imageName] || `/default.webp`
+}
+
 export default function Home() {
   const [products, setProducts] = useState<VapeProduct[]>([])
   const [loading, setLoading] = useState(true)
@@ -88,9 +111,8 @@ export default function Home() {
             <Card key={product.id} className="bg-gray-900 border-gray-800">
               <CardHeader className="flex flex-col gap-4 pb-4">
                 <div className="w-full aspect-square relative border-2 border-gray-600 rounded-lg overflow-hidden bg-gray-800">
-                  {/* Image with dynamic extension handling */}
                   <Image
-                    src={`/${product.image_name}${product.image_name.includes('.') ? '' : '.webp'}`}
+                    src={getImagePath(product.image_name)}
                     alt={product.name}
                     fill
                     className="object-cover"
