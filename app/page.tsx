@@ -476,6 +476,7 @@ export default function Home() {
             <Card key={product.id} className="bg-gray-900 border-gray-800">
               <CardHeader className="flex flex-col gap-4 pb-4">
                 <div className="w-full aspect-square relative border-2 border-gray-600 rounded-lg overflow-hidden bg-gray-800">
+                  {/* Image with dynamic extension handling */}
                   <Image
                     src={`/${product.imageName}${product.imageName.includes('.') ? '' : '.webp'}`}
                     alt={product.name}
