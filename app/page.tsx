@@ -341,6 +341,24 @@ const vapeProducts: VapeProduct[] = [
       { name: 'Orange Mango Guava', inStock: true },
       { name: 'Sour Apple Grape Kiwi', inStock: true },
     ]
+  },
+  {
+    id: 'viho_sp',
+    name: 'Viho Supercharge Pro',
+    puffs: '20,000',
+    price: '$20.00',
+    imageName: 'SP',
+    flavors: [
+      { name: 'White Peach Razz', inStock: true },
+      { name: 'Strawberry Colada', inStock: true },
+      { name: 'Smooth Tobacco', inStock: true },
+      { name: 'Peach Rings', inStock: true },
+      { name: 'Strawberry Ice', inStock: true },
+      { name: 'Sour Apple Ice', inStock: true },
+      { name: 'Tobacco Mint', inStock: true },
+      { name: 'Orange Splash', inStock: true },
+      { name: 'Sour Apple Fcucking Fab', inStock: true },
+    ]
   }
 ]
 
