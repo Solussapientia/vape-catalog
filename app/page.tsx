@@ -18,6 +18,7 @@ function getImagePath(imageName: string): string {
     'pulse_x': '/pulse_x.webp',
     'pulse': '/pulse.webp',
     'meloso': '/meloso.webp',
+    'RYL': '/RYL.jpg',
     'LTX': '/LTX.webp',
     'razz': '/razz.webp',
     'LM20000': '/LM20000.webp',
