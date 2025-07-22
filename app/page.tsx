@@ -12,6 +12,7 @@ interface VapeProduct extends Product {
 // Map database image names to actual filenames in public folder
 function getImagePath(imageName: string): string {
   const imageMap: { [key: string]: string } = {
+    'ADJUST': '/ADJUST.webp',
     'ria': '/ria.webp',
     'skyview': '/skyview.webp', 
     'pulse_x': '/pulse_x.webp',
