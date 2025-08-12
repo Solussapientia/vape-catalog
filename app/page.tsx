@@ -38,6 +38,7 @@ export default function Home() {
   const [products, setProducts] = useState<VapeProduct[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [showOutOfStockMap, setShowOutOfStockMap] = useState<Record<string, boolean>>({})
 
   useEffect(() => {
     fetchProducts()
@@ -153,17 +154,63 @@ export default function Home() {
               <CardBody className="pt-0">
                 <div className="mb-3">
                   <h3 className="text-sm font-medium text-gray-300 mb-2">Available Flavors:</h3>
-                  <div className="space-y-1">
-                    {product.flavors?.map((flavor) => (
-                      <div key={flavor.id} className="flex items-center gap-2 text-xs">
-                        <div className={`w-2 h-2 rounded-full ${flavor.in_stock ? 'bg-green-500' : 'bg-red-500'}`} />
-                        <span className="text-gray-300">{flavor.name}</span>
-                        <span className={`text-xs ${flavor.in_stock ? 'text-green-400' : 'text-red-400'}`}>
-                          {flavor.in_stock ? 'In Stock' : 'Out of Stock'}
-                        </span>
+                  {(() => {
+                    const flavors = product.flavors || []
+                    const inStockFlavors = flavors.filter((f: Flavor) => f.in_stock)
+                    const outOfStockFlavors = flavors.filter((f: Flavor) => !f.in_stock)
+                    const isExpanded = !!showOutOfStockMap[product.id]
+
+                    return (
+                      <div className="space-y-1">
+                        {inStockFlavors.length > 0 ? (
+                          inStockFlavors.map((flavor: Flavor) => (
+                            <div key={flavor.id} className="flex items-center gap-2 text-xs">
+                              <div className={`w-2 h-2 rounded-full ${flavor.in_stock ? 'bg-green-500' : 'bg-red-500'}`} />
+                              <span className="text-gray-300">{flavor.name}</span>
+                              <span className={`text-xs ${flavor.in_stock ? 'text-green-400' : 'text-red-400'}`}>
+                                {flavor.in_stock ? 'In Stock' : 'Out of Stock'}
+                              </span>
+                            </div>
+                          ))
+                        ) : (
+                          <p className="text-xs text-red-400">All flavors out of stock</p>
+                        )}
+
+                        {outOfStockFlavors.length > 0 && !isExpanded && (
+                          <button
+                            onClick={() =>
+                              setShowOutOfStockMap((prev) => ({ ...prev, [product.id]: true }))
+                            }
+                            className="mt-2 text-xs bg-gray-800 hover:bg-gray-700 text-gray-200 px-3 py-1 rounded-md"
+                          >
+                            View out of stock flavors
+                          </button>
+                        )}
+
+                        {isExpanded && (
+                          <>
+                            {outOfStockFlavors.map((flavor: Flavor) => (
+                              <div key={flavor.id} className="flex items-center gap-2 text-xs">
+                                <div className={`w-2 h-2 rounded-full ${flavor.in_stock ? 'bg-green-500' : 'bg-red-500'}`} />
+                                <span className="text-gray-300">{flavor.name}</span>
+                                <span className={`text-xs ${flavor.in_stock ? 'text-green-400' : 'text-red-400'}`}>
+                                  {flavor.in_stock ? 'In Stock' : 'Out of Stock'}
+                                </span>
+                              </div>
+                            ))}
+                            <button
+                              onClick={() =>
+                                setShowOutOfStockMap((prev) => ({ ...prev, [product.id]: false }))
+                              }
+                              className="mt-2 text-xs bg-gray-800 hover:bg-gray-700 text-gray-200 px-3 py-1 rounded-md"
+                            >
+                              Hide out of stock flavors
+                            </button>
+                          </>
+                        )}
                       </div>
-                    ))}
-                  </div>
+                    )
+                  })()}
                 </div>
               </CardBody>
             </Card>
