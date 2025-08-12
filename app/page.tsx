@@ -184,7 +184,7 @@ export default function Home() {
                             className="mt-2 text-xs text-gray-400 hover:text-gray-200 inline-flex items-center gap-1"
                           >
                             <span>View out of stock flavors</span>
-                            <span aria-hidden>▼</span>
+                            <span aria-hidden>v</span>
                           </button>
                         )}
 
@@ -206,7 +206,7 @@ export default function Home() {
                               className="mt-2 text-xs text-gray-400 hover:text-gray-200 inline-flex items-center gap-1"
                             >
                               <span>Hide out of stock flavors</span>
-                              <span aria-hidden>▲</span>
+                              <span aria-hidden>^</span>
                             </button>
                           </>
                         )}
