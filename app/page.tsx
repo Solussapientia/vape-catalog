@@ -181,10 +181,9 @@ export default function Home() {
                             onClick={() =>
                               setShowOutOfStockMap((prev) => ({ ...prev, [product.id]: true }))
                             }
-                            className="mt-2 text-xs text-gray-400 hover:text-gray-200 inline-flex items-center gap-1"
+                            className="mt-2 text-xs bg-gray-800 hover:bg-gray-700 text-gray-200 px-3 py-1 rounded-md"
                           >
-                            <span>View out of stock flavors</span>
-                            <span aria-hidden>v</span>
+                            View out of stock flavors
                           </button>
                         )}
 
@@ -203,10 +202,9 @@ export default function Home() {
                               onClick={() =>
                                 setShowOutOfStockMap((prev) => ({ ...prev, [product.id]: false }))
                               }
-                              className="mt-2 text-xs text-gray-400 hover:text-gray-200 inline-flex items-center gap-1"
+                              className="mt-2 text-xs bg-gray-800 hover:bg-gray-700 text-gray-200 px-3 py-1 rounded-md"
                             >
-                              <span>Hide out of stock flavors</span>
-                              <span aria-hidden>^</span>
+                              Hide out of stock flavors
                             </button>
                           </>
                         )}
