@@ -60,7 +60,31 @@ export default function Home() {
         throw productsError
       }
 
-      setProducts(productsData || [])
+      // Sort flavors in-stock first within each product, then sort products so
+      // items with any in-stock flavors appear before items with none.
+      const sortedProducts = (productsData || [])
+        .map((product: VapeProduct) => {
+          const sortedFlavors = (product.flavors || []).slice().sort((a: Flavor, b: Flavor) => {
+            // In-stock first
+            const stockDiff = Number(b.in_stock) - Number(a.in_stock)
+            if (stockDiff !== 0) return stockDiff
+            // Fallback alphabetical by name for stable ordering
+            return a.name.localeCompare(b.name)
+          })
+
+          return { ...product, flavors: sortedFlavors }
+        })
+        .sort((a: VapeProduct, b: VapeProduct) => {
+          const aHasStock = Array.isArray(a.flavors) && a.flavors.some((f: Flavor) => f.in_stock)
+          const bHasStock = Array.isArray(b.flavors) && b.flavors.some((f: Flavor) => f.in_stock)
+          if (aHasStock !== bHasStock) return aHasStock ? -1 : 1
+          // Preserve original created order as a tiebreaker
+          const aTime = a.created_at ? new Date(a.created_at).getTime() : 0
+          const bTime = b.created_at ? new Date(b.created_at).getTime() : 0
+          return aTime - bTime
+        })
+
+      setProducts(sortedProducts)
     } catch (err) {
       console.error('Error fetching products:', err)
       setError('Failed to load products')
