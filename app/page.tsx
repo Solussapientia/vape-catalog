@@ -28,9 +28,15 @@ function getImagePath(imageName: string): string {
     'SP.jpg': '/SP.jpg',
     'S.jpg': '/S.jpg',
     'T': '/T.webp',
-    'hyde': '/hyde.webp'
+    'hyde': '/hyde.webp',
+    'VIHO_Thumbnail__46533.png': '/VIHO_Thumbnail__46533.png'
   }
-  
+
+  // If the DB provides a concrete filename with an extension, use it directly
+  if (imageName && imageName.includes('.')) {
+    return `/${imageName}`
+  }
+
   return imageMap[imageName] || `/default.webp`
 }
 
@@ -138,6 +144,11 @@ export default function Home() {
             <Card key={product.id} className="bg-gray-900 border-gray-800">
               <CardHeader className="flex flex-col gap-4 pb-4">
                 <div className="w-full aspect-square relative border-2 border-gray-600 rounded-lg overflow-hidden bg-gray-800">
+                  {product.id === 'viho_trx_50k' && (
+                    <span className="absolute top-2 left-2 z-10 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded-md shadow">
+                      NEW
+                    </span>
+                  )}
                   <Image
                     src={getImagePath(product.image_name)}
                     alt={product.name}
