@@ -6,6 +6,9 @@ const newFlavors = [
   'Summer Splash',
   'Sour Apple Ice',
   'Blue Razz B Pop',
+  'Sour Blue Razz Ice',
+  'Sour Peach Raspberry',
+  'Sour Grapple',
 ]
 
 async function addAdjustFlavors() {

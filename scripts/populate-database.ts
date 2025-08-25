@@ -38,6 +38,9 @@ const vapeProducts = [
       { name: 'Summer Splash', inStock: true },
       { name: 'Sour Apple Ice', inStock: true },
       { name: 'Blue Razz B Pop', inStock: true },
+      { name: 'Sour Blue Razz Ice', inStock: true },
+      { name: 'Sour Peach Raspberry', inStock: true },
+      { name: 'Sour Grapple', inStock: true },
     ]
   },
   {
