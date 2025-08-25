@@ -350,6 +350,7 @@ const vapeProducts = [
       { name: 'Banana Raspberry Ice', inStock: true },
       { name: 'Cherry Lemon', inStock: true },
       { name: 'Cherry Blossom Grape', inStock: true },
+      { name: 'Berry Cake', inStock: true },
     ]
   },
   {
