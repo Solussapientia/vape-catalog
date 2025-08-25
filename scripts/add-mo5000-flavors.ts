@@ -1,6 +1,6 @@
 import { supabase } from '../lib/supabase'
 
-const newFlavors = ['Berry Cake']
+const newFlavors = ['Berry Cake', 'Watermelon Ice']
 
 async function addMo5000Flavors() {
   try {
