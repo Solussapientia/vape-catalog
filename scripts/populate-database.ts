@@ -33,6 +33,11 @@ const vapeProducts = [
       { name: 'Tangerine white gummy', inStock: true },
       { name: 'Peach', inStock: true },
       { name: 'Midnight ice chill', inStock: true },
+      { name: 'Watermelon Ice', inStock: true },
+      { name: 'Strawberry Banana', inStock: true },
+      { name: 'Summer Splash', inStock: true },
+      { name: 'Sour Apple Ice', inStock: true },
+      { name: 'Blue Razz B Pop', inStock: true },
     ]
   },
   {
