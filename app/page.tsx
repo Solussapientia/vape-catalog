@@ -149,6 +149,11 @@ export default function Home() {
                       NEW
                     </span>
                   )}
+                  {product.id === 'hyde_iq' && (
+                    <span className="absolute top-2 right-2 z-10 flash-sale-badge text-white text-[10px] font-bold px-2 py-1 rounded-md shadow">
+                      FLASH SALE
+                    </span>
+                  )}
                   <Image
                     src={getImagePath(product.image_name)}
                     alt={product.name}

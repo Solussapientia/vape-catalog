@@ -8,3 +8,16 @@ body {
   background-color: #0a0a0a;
   color: white;
 } 
+
+/* Rainbow animated gradient for FLASH SALE badge */
+.flash-sale-badge {
+  background: linear-gradient(270deg, #ff6b6b, #f7d794, #1dd1a1, #48dbfb, #5f27cd, #ff6b6b);
+  background-size: 1200% 1200%;
+  animation: flash-rainbow 8s ease infinite;
+}
+
+@keyframes flash-rainbow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
