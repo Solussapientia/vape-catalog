@@ -259,31 +259,55 @@ export default function Home() {
                     (() => {
                       const pod = products.find((p) => p.id === 'fogger_switch_pod')
                       const kitFlavors = (product.flavors || []).filter((f) => f.in_stock)
-                      const podFlavors = (pod?.flavors || []).filter((f) => f.in_stock)
+                      const podFlavors = (pod?.flavors || [])
                       return (
                         <div className="space-y-4">
                           <div>
                             <h3 className="text-sm font-medium text-gray-300 mb-2">Kit Flavors:</h3>
                             <div className="space-y-1">
-                              {kitFlavors.map((flavor: Flavor) => (
-                                <div key={flavor.id} className="flex items-center gap-2 text-xs">
-                                  <div className="w-2 h-2 rounded-full bg-green-500" />
-                                  <span className="text-gray-300">{flavor.name}</span>
-                                  <span className="text-xs text-green-400">In Stock</span>
-                                </div>
-                              ))}
+                              {/* In stock first */}
+                              {kitFlavors
+                                .filter((f: Flavor) => f.in_stock)
+                                .map((flavor: Flavor) => (
+                                  <div key={flavor.id} className="flex items-center gap-2 text-xs">
+                                    <div className="w-2 h-2 rounded-full bg-green-500" />
+                                    <span className="text-gray-300">{flavor.name}</span>
+                                    <span className="text-xs text-green-400">In Stock</span>
+                                  </div>
+                                ))}
+                              {/* Out of stock */}
+                              {kitFlavors
+                                .filter((f: Flavor) => !f.in_stock)
+                                .map((flavor: Flavor) => (
+                                  <div key={flavor.id} className="flex items-center gap-2 text-xs">
+                                    <div className="w-2 h-2 rounded-full bg-red-500" />
+                                    <span className="text-gray-300">{flavor.name}</span>
+                                    <span className="text-xs text-red-400">Out of Stock</span>
+                                  </div>
+                                ))}
                             </div>
                           </div>
                           <div>
                             <h3 className="text-sm font-medium text-gray-300 mb-2">Pod Flavors:</h3>
                             <div className="space-y-1">
-                              {podFlavors.map((flavor: Flavor) => (
-                                <div key={flavor.id} className="flex items-center gap-2 text-xs">
-                                  <div className="w-2 h-2 rounded-full bg-green-500" />
-                                  <span className="text-gray-300">{flavor.name}</span>
-                                  <span className="text-xs text-green-400">In Stock</span>
-                                </div>
-                              ))}
+                              {podFlavors
+                                .filter((f: Flavor) => f.in_stock)
+                                .map((flavor: Flavor) => (
+                                  <div key={flavor.id} className="flex items-center gap-2 text-xs">
+                                    <div className="w-2 h-2 rounded-full bg-green-500" />
+                                    <span className="text-gray-300">{flavor.name}</span>
+                                    <span className="text-xs text-green-400">In Stock</span>
+                                  </div>
+                                ))}
+                              {podFlavors
+                                .filter((f: Flavor) => !f.in_stock)
+                                .map((flavor: Flavor) => (
+                                  <div key={flavor.id} className="flex items-center gap-2 text-xs">
+                                    <div className="w-2 h-2 rounded-full bg-red-500" />
+                                    <span className="text-gray-300">{flavor.name}</span>
+                                    <span className="text-xs text-red-400">Out of Stock</span>
+                                  </div>
+                                ))}
                             </div>
                           </div>
                         </div>

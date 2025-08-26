@@ -22,7 +22,8 @@ async function run() {
       puffs: '30,000',
       price: '$30.00',
       image_name: 'ref.jpg',
-      created_at: new Date().toISOString(),
+      // Make kit the earliest so Fogger card renders first
+      created_at: '1989-01-01T00:00:00.000Z',
     }
     const kitFlavors = [
       'grape slush',
@@ -49,7 +50,7 @@ async function run() {
       puffs: '30,000',
       price: '$20.00',
       image_name: 'ref.jpg',
-      created_at: new Date().toISOString(),
+      created_at: '1989-01-01T00:00:00.000Z',
     }
     const podFlavors = [
       'blue razz ice',
