@@ -11,8 +11,8 @@ body {
 
 /* Red animated gradient for FLASH SALE badge (light red ↔ dark red; no whites) */
 .flash-sale-badge {
-  background: linear-gradient(270deg, #ef4444, #7f1d1d, #b91c1c, #ef4444);
-  background-size: 400% 400%;
+  background: linear-gradient(270deg, #fca5a5, #f87171, #ef4444, #dc2626, #ef4444, #f87171);
+  background-size: 600% 600%;
   animation: flash-red 6s ease-in-out infinite;
 }
 
