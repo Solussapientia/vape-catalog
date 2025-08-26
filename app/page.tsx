@@ -147,10 +147,17 @@ export default function Home() {
         {/* Product Cards */}
         <div className="space-y-6">
           {products.map((product) => (
+            // Skip rendering standalone pod card; it's shown inside the kit card
+            product.id === 'fogger_switch_pod' ? null : (
             <Card key={product.id} className="bg-gray-900 border-gray-800">
               <CardHeader className="flex flex-col gap-4 pb-4">
                 <div className="w-full aspect-square relative border-2 border-gray-600 rounded-lg overflow-hidden bg-gray-800">
                   {product.id === 'viho_trx_50k' && (
+                    <span className="absolute top-2 left-2 z-10 new-rainbow-badge text-white text-[10px] font-bold px-2 py-1 rounded-md shadow">
+                      NEW
+                    </span>
+                  )}
+                  {product.id === 'fogger_switch_pro_kit' && (
                     <span className="absolute top-2 left-2 z-10 new-rainbow-badge text-white text-[10px] font-bold px-2 py-1 rounded-md shadow">
                       NEW
                     </span>
@@ -196,48 +203,8 @@ export default function Home() {
                     className="object-cover"
                   />
                 </div>
-                {/* Header pricing area: special combined render for Fogger Switch Pro */}
-                {product.id === 'fogger_switch_pro_kit' ? (
-                  (() => {
-                    const pod = products.find((p) => p.id === 'fogger_switch_pod')
-                    return (
-                      <div className="flex flex-col text-center">
-                        <p className="text-xl font-semibold text-white mb-1">Fogger Switch Pro</p>
-                        {/* NEW badge */}
-                        <span className="mx-auto mb-2 new-rainbow-badge text-white text-[10px] font-bold px-2 py-1 rounded-md shadow w-max">NEW</span>
-
-                        {/* Kit section */}
-                        <div className="mt-2">
-                          <p className="text-sm text-gray-300 font-medium">Fogger switch pro kit</p>
-                          <p className="text-base text-gray-400">{product.puffs} puffs</p>
-                          <p className="text-lg font-medium text-green-400">{product.price}</p>
-                          <div className="mt-2 px-3 py-2 text-xs text-yellow-300 bg-yellow-500/10 border border-yellow-500/30 rounded-md inline-flex items-center gap-2 mx-auto">
-                            <span className="inline-block w-1.5 h-1.5 rounded-full bg-yellow-400"></span>
-                            <span className="font-semibold">WARNING:</span>
-                            <span className="text-yellow-300">This is for a kit (battery and pod). If you already have a battery, you can purchase a pod separately below.</span>
-                          </div>
-                        </div>
-
-                        {/* Divider */}
-                        <div className="my-3 border-t border-gray-700" />
-
-                        {/* Pod section */}
-                        {pod && (
-                          <div className="mt-1">
-                            <p className="text-sm text-gray-300 font-medium">Fogger switch pod</p>
-                            <p className="text-base text-gray-400">{pod.puffs} puffs</p>
-                            <p className="text-lg font-medium text-green-400">{pod.price}</p>
-                            <div className="mt-2 px-3 py-2 text-xs text-yellow-300 bg-yellow-500/10 border border-yellow-500/30 rounded-md inline-flex items-center gap-2 mx-auto">
-                              <span className="inline-block w-1.5 h-1.5 rounded-full bg-yellow-400"></span>
-                              <span className="font-semibold">WARNING:</span>
-                              <span className="text-yellow-300">This is for a pod (needs a battery). If you do not have a battery, purchase a kit above that includes a battery and pod.</span>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    )
-                  })()
-                ) : (
+                {/* For Fogger, details render in CardBody; otherwise render standard header details */}
+                {product.id !== 'fogger_switch_pro_kit' ? (
                   <div className="flex flex-col text-center">
                     <p className="text-xl font-semibold text-white mb-1">{product.name}</p>
                     <p className="text-base text-gray-400 mb-1">{product.puffs} puffs</p>
@@ -250,20 +217,29 @@ export default function Home() {
                       </div>
                     )}
                   </div>
-                )}
+                ) : null}
               </CardHeader>
               <CardBody className="pt-0">
                 <div className="mb-3">
-                  {/* Flavor lists: special combined rendering for Fogger Switch Pro */}
+                  {/* For Fogger Switch Pro, render: title+puffs+price+warning+flavors for kit, then for pod */}
                   {product.id === 'fogger_switch_pro_kit' ? (
                     (() => {
                       const pod = products.find((p) => p.id === 'fogger_switch_pod')
-                      const kitFlavors = (product.flavors || []).filter((f) => f.in_stock)
+                      const kitFlavors = (product.flavors || [])
                       const podFlavors = (pod?.flavors || [])
                       return (
-                        <div className="space-y-4">
+                        <div className="space-y-6">
                           <div>
-                            <h3 className="text-sm font-medium text-gray-300 mb-2">Kit Flavors:</h3>
+                            {/* Kit heading */}
+                            <p className="text-sm text-gray-300 font-medium text-center">Fogger switch pro kit</p>
+                            <p className="text-base text-gray-400 text-center">{product.puffs} puffs</p>
+                            <p className="text-lg font-medium text-green-400 text-center">{product.price}</p>
+                            <div className="mt-2 px-3 py-2 text-xs text-yellow-300 bg-yellow-500/10 border border-yellow-500/30 rounded-md inline-flex items-center gap-2 mx-auto">
+                              <span className="inline-block w-1.5 h-1.5 rounded-full bg-yellow-400"></span>
+                              <span className="font-semibold">WARNING:</span>
+                              <span className="text-yellow-300">This is for a kit (battery and pod). If you already have a battery, you can purchase a pod separately below.</span>
+                            </div>
+                            <h3 className="text-sm font-medium text-gray-300 mt-3 mb-2">Kit Flavors:</h3>
                             <div className="space-y-1">
                               {/* In stock first */}
                               {kitFlavors
@@ -288,7 +264,20 @@ export default function Home() {
                             </div>
                           </div>
                           <div>
-                            <h3 className="text-sm font-medium text-gray-300 mb-2">Pod Flavors:</h3>
+                            {/* Pod heading */}
+                            {pod && (
+                              <>
+                                <p className="text-sm text-gray-300 font-medium text-center">Fogger switch pod</p>
+                                <p className="text-base text-gray-400 text-center">{pod.puffs} puffs</p>
+                                <p className="text-lg font-medium text-green-400 text-center">{pod.price}</p>
+                                <div className="mt-2 px-3 py-2 text-xs text-yellow-300 bg-yellow-500/10 border border-yellow-500/30 rounded-md inline-flex items-center gap-2 mx-auto">
+                                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-yellow-400"></span>
+                                  <span className="font-semibold">WARNING:</span>
+                                  <span className="text-yellow-300">This is for a pod (needs a battery). If you do not have a battery, purchase a kit above that includes a battery and pod.</span>
+                                </div>
+                              </>
+                            )}
+                            <h3 className="text-sm font-medium text-gray-300 mt-3 mb-2">Pod Flavors:</h3>
                             <div className="space-y-1">
                               {podFlavors
                                 .filter((f: Flavor) => f.in_stock)
@@ -375,6 +364,7 @@ export default function Home() {
                 </div>
               </CardBody>
             </Card>
+            )
           ))}
         </div>
       </div>
