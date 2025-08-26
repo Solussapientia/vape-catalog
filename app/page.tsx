@@ -11,6 +11,7 @@ interface VapeProduct extends Product {
 
 // Map database image names to actual filenames in public folder
 function getImagePath(imageName: string): string {
+  const normalized = (imageName || '').trim()
   const imageMap: { [key: string]: string } = {
     'ADJUST': '/ADJUST.webp',
     'ria': '/ria.webp',
@@ -32,12 +33,12 @@ function getImagePath(imageName: string): string {
     'VIHO_Thumbnail__46533.png': '/VIHO_Thumbnail__46533.png'
   }
 
-  // If the DB provides a concrete filename with an extension, use it directly
-  if (imageName && imageName.includes('.')) {
-    return `/${imageName}`
+  // If the DB provides a concrete filename with an extension, use it directly (trimmed)
+  if (normalized && normalized.includes('.')) {
+    return `/${normalized}`
   }
 
-  return imageMap[imageName] || `/default.webp`
+  return imageMap[normalized] || `/default.webp`
 }
 
 export default function Home() {
