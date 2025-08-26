@@ -22,23 +22,22 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* True rainbow gradient for NEW badge (ROYGBIV), spread and slower with longer fades */
+/* True rainbow gradient for NEW badge (ROYGBIV), continuous and slow with long fades */
 .new-rainbow-badge {
   background: linear-gradient(90deg,
-    #ff0000 0%, #ff0000 12%,
-    #ff7f00 20%, #ff7f00 32%,
-    #ffff00 40%, #ffff00 52%,
-    #00ff00 60%, #00ff00 72%,
-    #0000ff 80%, #0000ff 88%,
-    #4b0082 94%,
+    #ff0000 0%,
+    #ff7f00 16%,
+    #ffff00 33%,
+    #00ff00 50%,
+    #0000ff 66%,
+    #4b0082 83%,
     #8f00ff 100%
   );
-  background-size: 1000% 1000%;
-  animation: rainbow-shift-slow 16s ease-in-out infinite;
+  background-size: 2000% 2000%;
+  animation: rainbow-shift-smooth 28s linear infinite alternate;
 }
 
-@keyframes rainbow-shift-slow {
-  0%, 12% { background-position: 0% 50%; }
-  45%, 55% { background-position: 100% 50%; }
-  88%, 100% { background-position: 0% 50%; }
+@keyframes rainbow-shift-smooth {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
 }
