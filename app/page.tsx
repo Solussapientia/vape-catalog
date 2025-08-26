@@ -141,7 +141,7 @@ export default function Home() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/24r.gif" alt="shh" className="h-20 w-auto object-contain" />
           </div>
-          <p className="text-gray-400 text-sm">your secret go to vape list</p>
+          <p className="text-gray-300 text-lg md:text-xl font-semibold tracking-wide uppercase">your secret go to vape list</p>
         </div>
 
         {/* Product Cards */}
