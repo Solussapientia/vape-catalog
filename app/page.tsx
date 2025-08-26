@@ -165,6 +165,11 @@ export default function Home() {
                       FLASH SALE
                     </span>
                   )}
+                  {product.id === 'mood_bar_air' && (
+                    <span className="absolute top-2 left-2 z-10 flash-sale-badge text-white text-[10px] font-bold px-2 py-1 rounded-md shadow">
+                      SALE
+                    </span>
+                  )}
                   <Image
                     src={getImagePath(product.image_name)}
                     alt={product.name}
