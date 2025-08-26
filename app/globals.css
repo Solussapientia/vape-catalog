@@ -58,3 +58,8 @@ body {
   color: transparent;
   display: inline-block;
 }
+
+/* Hot Seller badge styling (reuses red gradient animation subtly) */
+.hot-seller-badge {
+  background: linear-gradient(90deg, rgba(239,68,68,0.9), rgba(217,70,239,0.9));
+}

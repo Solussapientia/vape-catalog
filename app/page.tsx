@@ -175,6 +175,20 @@ export default function Home() {
                       FLASH SALE
                     </span>
                   )}
+                  {(product.id === 'adjust' || product.name.toLowerCase().includes('adjust')) && (
+                    <span className="absolute top-2 left-2 z-10 hot-seller-badge text-white text-[10px] font-bold px-2 py-1 rounded-md shadow inline-flex items-center gap-1">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src="/512.gif" alt="fire" className="h-3 w-3 object-contain" />
+                      HOT SELLER
+                    </span>
+                  )}
+                  {((product.id && product.id.toLowerCase().includes('ryl')) || product.name.toLowerCase().includes('ryl')) && (
+                    <span className="absolute top-2 left-2 z-10 hot-seller-badge text-white text-[10px] font-bold px-2 py-1 rounded-md shadow inline-flex items-center gap-1">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src="/512.gif" alt="fire" className="h-3 w-3 object-contain" />
+                      HOT SELLER
+                    </span>
+                  )}
                   <Image
                     src={getImagePath(product.image_name)}
                     alt={product.name}
@@ -190,7 +204,7 @@ export default function Home() {
                     <div className="mt-2 px-3 py-2 text-xs text-red-300 bg-red-500/10 border border-red-500/30 rounded-md inline-flex items-center gap-2 mx-auto">
                       <span className="inline-block w-1.5 h-1.5 rounded-full bg-red-500"></span>
                       <span className="font-semibold">WARNING:</span>
-                      <span className="text-red-300">This product does not contain nicotene but instead includes an alternative called NONIC6, an unregulated nicotene alternative.</span>
+                      <span className="text-red-300">This product does not contain nicotine. It includes an alternative called NONIC6, an unregulated nicotine alternative.</span>
                     </div>
                   )}
                 </div>
