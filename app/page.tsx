@@ -133,7 +133,7 @@ export default function Home() {
       <div className="container mx-auto px-4 py-6">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+          <h1 className="text-4xl font-bold mb-2 rainbow-title bg-clip-text text-transparent">
             VAPE LIST
           </h1>
           <div className="w-full flex justify-center mb-2">

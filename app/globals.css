@@ -41,3 +41,18 @@ body {
   0% { background-position: 0% 50%; }
   100% { background-position: 100% 50%; }
 }
+
+/* Slow continuous rainbow gradient for the main title text */
+.rainbow-title {
+  background: linear-gradient(90deg,
+    #ff0000 0%,
+    #ff7f00 16%,
+    #ffff00 33%,
+    #00ff00 50%,
+    #0000ff 66%,
+    #4b0082 83%,
+    #8f00ff 100%
+  );
+  background-size: 2000% 2000%;
+  animation: rainbow-shift-smooth 28s linear infinite alternate;
+}
