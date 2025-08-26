@@ -187,10 +187,10 @@ export default function Home() {
                   <p className="text-base text-gray-400 mb-1">{product.puffs} puffs</p>
                   <p className="text-lg font-medium text-green-400">{product.price}</p>
                   {product.id === 'kumi_six_10000' && (
-                    <div className="mt-2 px-3 py-2 text-xs text-red-900 bg-red-100 border border-red-300 rounded-md inline-flex items-center gap-2 mx-auto">
+                    <div className="mt-2 px-3 py-2 text-xs text-red-300 bg-red-500/10 border border-red-500/30 rounded-md inline-flex items-center gap-2 mx-auto">
                       <span className="inline-block w-1.5 h-1.5 rounded-full bg-red-500"></span>
                       <span className="font-semibold">WARNING:</span>
-                      <span className="text-red-800">This product does not contain nicotene but instead includes an alternative called NONIC6, an unregulated nicotene alternative.</span>
+                      <span className="text-red-300">This product does not contain nicotene but instead includes an alternative called NONIC6, an unregulated nicotene alternative.</span>
                     </div>
                   )}
                 </div>
