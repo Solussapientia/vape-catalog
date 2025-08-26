@@ -9,14 +9,27 @@ body {
   color: white;
 } 
 
-/* Blue animated gradient for FLASH SALE badge */
+/* Red animated gradient for FLASH SALE badge */
 .flash-sale-badge {
-  background: linear-gradient(270deg, #60a5fa, #3b82f6, #1d4ed8, #0ea5e9, #3b82f6, #60a5fa);
+  background: linear-gradient(270deg, #fecaca, #f87171, #ef4444, #dc2626, #ef4444, #f87171, #fecaca);
   background-size: 600% 600%;
-  animation: flash-blue 6s ease infinite;
+  animation: flash-red 6s ease infinite;
 }
 
-@keyframes flash-blue {
+@keyframes flash-red {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* True rainbow gradient for NEW badge (ROYGBIV) */
+.new-rainbow-badge {
+  background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8f00ff);
+  background-size: 400% 400%;
+  animation: rainbow-shift 8s ease infinite;
+}
+
+@keyframes rainbow-shift {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
