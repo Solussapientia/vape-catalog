@@ -150,7 +150,7 @@ export default function Home() {
                     </span>
                   )}
                    {product.id === 'hyde_iq' && (
-                    <span className="absolute top-2 left-2 z-10 ml-16 flash-sale-badge text-white text-[10px] font-bold px-2 py-1 rounded-md shadow">
+                    <span className="absolute top-2 left-2 z-10 flash-sale-badge text-white text-[10px] font-bold px-2 py-1 rounded-md shadow">
                       FLASH SALE
                     </span>
                   )}
