@@ -231,8 +231,8 @@ export default function Home() {
                         <div className="space-y-6">
                           <div>
                             {/* Kit heading */}
-                            <p className="text-sm text-gray-300 font-medium text-center">Fogger switch pro kit</p>
-                            <p className="text-base text-gray-400 text-center">{product.puffs} puffs</p>
+                            <p className="text-xl font-semibold text-white mb-1 text-center">Fogger switch pro kit</p>
+                            <p className="text-base text-gray-400 mb-1 text-center">{product.puffs} puffs</p>
                             <p className="text-lg font-medium text-green-400 text-center">{product.price}</p>
                             <div className="mt-2 px-3 py-2 text-xs text-yellow-300 bg-yellow-500/10 border border-yellow-500/30 rounded-md inline-flex items-center gap-2 mx-auto">
                               <span className="inline-block w-1.5 h-1.5 rounded-full bg-yellow-400"></span>
@@ -267,8 +267,8 @@ export default function Home() {
                             {/* Pod heading */}
                             {pod && (
                               <>
-                                <p className="text-sm text-gray-300 font-medium text-center">Fogger switch pod</p>
-                                <p className="text-base text-gray-400 text-center">{pod.puffs} puffs</p>
+                                <p className="text-xl font-semibold text-white mb-1 text-center">Fogger switch pod</p>
+                                <p className="text-base text-gray-400 mb-1 text-center">{pod.puffs} puffs</p>
                                 <p className="text-lg font-medium text-green-400 text-center">{pod.price}</p>
                                 <div className="mt-2 px-3 py-2 text-xs text-yellow-300 bg-yellow-500/10 border border-yellow-500/30 rounded-md inline-flex items-center gap-2 mx-auto">
                                   <span className="inline-block w-1.5 h-1.5 rounded-full bg-yellow-400"></span>
