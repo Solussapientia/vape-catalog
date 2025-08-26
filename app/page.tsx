@@ -136,7 +136,12 @@ export default function Home() {
           <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
             VAPE LIST
           </h1>
-          <p className="text-gray-400 text-sm">Premium vape products</p>
+          <div className="w-full flex justify-center mb-2">
+            {/* decorative looping gif */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/24r.gif" alt="shh" className="h-10 w-10" />
+          </div>
+          <p className="text-gray-400 text-sm">your secret go to vape list</p>
         </div>
 
         {/* Product Cards */}
