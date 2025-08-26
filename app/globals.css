@@ -55,4 +55,8 @@ body {
   );
   background-size: 2000% 2000%;
   animation: rainbow-shift-smooth 28s linear infinite alternate;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
 }
