@@ -45,12 +45,11 @@ body {
 /* Slow continuous rainbow gradient for the main title text */
 .rainbow-title {
   background: linear-gradient(90deg,
-    #ff0000 0%,
-    #ff7f00 16%,
-    #ffff00 33%,
+    #ff7f00 0%,
+    #ffff00 25%,
     #00ff00 50%,
-    #0000ff 66%,
-    #4b0082 83%,
+    #0000ff 75%,
+    #4b0082 88%,
     #8f00ff 100%
   );
   background-size: 2000% 2000%;
