@@ -196,58 +196,110 @@ export default function Home() {
                     className="object-cover"
                   />
                 </div>
-                <div className="flex flex-col text-center">
-                  <p className="text-xl font-semibold text-white mb-1">{product.name}</p>
-                  <p className="text-base text-gray-400 mb-1">{product.puffs} puffs</p>
-                  <p className="text-lg font-medium text-green-400">{product.price}</p>
-                  {product.id === 'kumi_six_10000' && (
-                    <div className="mt-2 px-3 py-2 text-xs text-red-300 bg-red-500/10 border border-red-500/30 rounded-md inline-flex items-center gap-2 mx-auto">
-                      <span className="inline-block w-1.5 h-1.5 rounded-full bg-red-500"></span>
-                      <span className="font-semibold">WARNING:</span>
-                      <span className="text-red-300">This product does not contain nicotine. It includes an alternative called NONIC6, an unregulated nicotine alternative.</span>
-                    </div>
-                  )}
-                </div>
+                {/* Header pricing area: special combined render for Fogger Switch Pro */}
+                {product.id === 'fogger_switch_pro_kit' ? (
+                  (() => {
+                    const pod = products.find((p) => p.id === 'fogger_switch_pod')
+                    return (
+                      <div className="flex flex-col text-center">
+                        <p className="text-xl font-semibold text-white mb-1">Fogger Switch Pro</p>
+                        {/* NEW badge */}
+                        <span className="mx-auto mb-2 new-rainbow-badge text-white text-[10px] font-bold px-2 py-1 rounded-md shadow w-max">NEW</span>
+
+                        {/* Kit section */}
+                        <div className="mt-2">
+                          <p className="text-sm text-gray-300 font-medium">Fogger switch pro kit</p>
+                          <p className="text-base text-gray-400">{product.puffs} puffs</p>
+                          <p className="text-lg font-medium text-green-400">{product.price}</p>
+                          <div className="mt-2 px-3 py-2 text-xs text-yellow-300 bg-yellow-500/10 border border-yellow-500/30 rounded-md inline-flex items-center gap-2 mx-auto">
+                            <span className="inline-block w-1.5 h-1.5 rounded-full bg-yellow-400"></span>
+                            <span className="font-semibold">WARNING:</span>
+                            <span className="text-yellow-300">This is for a kit (battery and pod). If you already have a battery, you can purchase a pod separately below.</span>
+                          </div>
+                        </div>
+
+                        {/* Divider */}
+                        <div className="my-3 border-t border-gray-700" />
+
+                        {/* Pod section */}
+                        {pod && (
+                          <div className="mt-1">
+                            <p className="text-sm text-gray-300 font-medium">Fogger switch pod</p>
+                            <p className="text-base text-gray-400">{pod.puffs} puffs</p>
+                            <p className="text-lg font-medium text-green-400">{pod.price}</p>
+                            <div className="mt-2 px-3 py-2 text-xs text-yellow-300 bg-yellow-500/10 border border-yellow-500/30 rounded-md inline-flex items-center gap-2 mx-auto">
+                              <span className="inline-block w-1.5 h-1.5 rounded-full bg-yellow-400"></span>
+                              <span className="font-semibold">WARNING:</span>
+                              <span className="text-yellow-300">This is for a pod (needs a battery). If you do not have a battery, purchase a kit above that includes a battery and pod.</span>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )
+                  })()
+                ) : (
+                  <div className="flex flex-col text-center">
+                    <p className="text-xl font-semibold text-white mb-1">{product.name}</p>
+                    <p className="text-base text-gray-400 mb-1">{product.puffs} puffs</p>
+                    <p className="text-lg font-medium text-green-400">{product.price}</p>
+                    {product.id === 'kumi_six_10000' && (
+                      <div className="mt-2 px-3 py-2 text-xs text-red-300 bg-red-500/10 border border-red-500/30 rounded-md inline-flex items-center gap-2 mx-auto">
+                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                        <span className="font-semibold">WARNING:</span>
+                        <span className="text-red-300">This product does not contain nicotine. It includes an alternative called NONIC6, an unregulated nicotine alternative.</span>
+                      </div>
+                    )}
+                  </div>
+                )}
               </CardHeader>
               <CardBody className="pt-0">
                 <div className="mb-3">
-                  <h3 className="text-sm font-medium text-gray-300 mb-2">Available Flavors:</h3>
-                  {(() => {
-                    const flavors = product.flavors || []
-                    const inStockFlavors = flavors.filter((f: Flavor) => f.in_stock)
-                    const outOfStockFlavors = flavors.filter((f: Flavor) => !f.in_stock)
-                    const isExpanded = !!showOutOfStockMap[product.id]
-
-                    return (
-                      <div className="space-y-1">
-                        {inStockFlavors.length > 0 ? (
-                          inStockFlavors.map((flavor: Flavor) => (
-                            <div key={flavor.id} className="flex items-center gap-2 text-xs">
-                              <div className={`w-2 h-2 rounded-full ${flavor.in_stock ? 'bg-green-500' : 'bg-red-500'}`} />
-                              <span className="text-gray-300">{flavor.name}</span>
-                              <span className={`text-xs ${flavor.in_stock ? 'text-green-400' : 'text-red-400'}`}>
-                                {flavor.in_stock ? 'In Stock' : 'Out of Stock'}
-                              </span>
+                  {/* Flavor lists: special combined rendering for Fogger Switch Pro */}
+                  {product.id === 'fogger_switch_pro_kit' ? (
+                    (() => {
+                      const pod = products.find((p) => p.id === 'fogger_switch_pod')
+                      const kitFlavors = (product.flavors || []).filter((f) => f.in_stock)
+                      const podFlavors = (pod?.flavors || []).filter((f) => f.in_stock)
+                      return (
+                        <div className="space-y-4">
+                          <div>
+                            <h3 className="text-sm font-medium text-gray-300 mb-2">Kit Flavors:</h3>
+                            <div className="space-y-1">
+                              {kitFlavors.map((flavor: Flavor) => (
+                                <div key={flavor.id} className="flex items-center gap-2 text-xs">
+                                  <div className="w-2 h-2 rounded-full bg-green-500" />
+                                  <span className="text-gray-300">{flavor.name}</span>
+                                  <span className="text-xs text-green-400">In Stock</span>
+                                </div>
+                              ))}
                             </div>
-                          ))
-                        ) : (
-                          <p className="text-xs text-red-400">All flavors out of stock</p>
-                        )}
+                          </div>
+                          <div>
+                            <h3 className="text-sm font-medium text-gray-300 mb-2">Pod Flavors:</h3>
+                            <div className="space-y-1">
+                              {podFlavors.map((flavor: Flavor) => (
+                                <div key={flavor.id} className="flex items-center gap-2 text-xs">
+                                  <div className="w-2 h-2 rounded-full bg-green-500" />
+                                  <span className="text-gray-300">{flavor.name}</span>
+                                  <span className="text-xs text-green-400">In Stock</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      )
+                    })()
+                  ) : (
+                    (() => {
+                      const flavors = product.flavors || []
+                      const inStockFlavors = flavors.filter((f: Flavor) => f.in_stock)
+                      const outOfStockFlavors = flavors.filter((f: Flavor) => !f.in_stock)
+                      const isExpanded = !!showOutOfStockMap[product.id]
 
-                        {outOfStockFlavors.length > 0 && !isExpanded && (
-                          <button
-                            onClick={() =>
-                              setShowOutOfStockMap((prev) => ({ ...prev, [product.id]: true }))
-                            }
-                            className="mt-2 text-xs bg-gray-800 hover:bg-gray-700 text-gray-200 px-3 py-1 rounded-md"
-                          >
-                            View out of stock flavors
-                          </button>
-                        )}
-
-                        {isExpanded && (
-                          <>
-                            {outOfStockFlavors.map((flavor: Flavor) => (
+                      return (
+                        <div className="space-y-1">
+                          {inStockFlavors.length > 0 ? (
+                            inStockFlavors.map((flavor: Flavor) => (
                               <div key={flavor.id} className="flex items-center gap-2 text-xs">
                                 <div className={`w-2 h-2 rounded-full ${flavor.in_stock ? 'bg-green-500' : 'bg-red-500'}`} />
                                 <span className="text-gray-300">{flavor.name}</span>
@@ -255,20 +307,47 @@ export default function Home() {
                                   {flavor.in_stock ? 'In Stock' : 'Out of Stock'}
                                 </span>
                               </div>
-                            ))}
+                            ))
+                          ) : (
+                            <p className="text-xs text-red-400">All flavors out of stock</p>
+                          )}
+
+                          {outOfStockFlavors.length > 0 && !isExpanded && (
                             <button
                               onClick={() =>
-                                setShowOutOfStockMap((prev) => ({ ...prev, [product.id]: false }))
+                                setShowOutOfStockMap((prev) => ({ ...prev, [product.id]: true }))
                               }
                               className="mt-2 text-xs bg-gray-800 hover:bg-gray-700 text-gray-200 px-3 py-1 rounded-md"
                             >
-                              Hide out of stock flavors
+                              View out of stock flavors
                             </button>
-                          </>
-                        )}
-                      </div>
-                    )
-                  })()}
+                          )}
+
+                          {isExpanded && (
+                            <>
+                              {outOfStockFlavors.map((flavor: Flavor) => (
+                                <div key={flavor.id} className="flex items-center gap-2 text-xs">
+                                  <div className={`w-2 h-2 rounded-full ${flavor.in_stock ? 'bg-green-500' : 'bg-red-500'}`} />
+                                  <span className="text-gray-300">{flavor.name}</span>
+                                  <span className={`text-xs ${flavor.in_stock ? 'text-green-400' : 'text-red-400'}`}>
+                                    {flavor.in_stock ? 'In Stock' : 'Out of Stock'}
+                                  </span>
+                                </div>
+                              ))}
+                              <button
+                                onClick={() =>
+                                  setShowOutOfStockMap((prev) => ({ ...prev, [product.id]: false }))
+                                }
+                                className="mt-2 text-xs bg-gray-800 hover:bg-gray-700 text-gray-200 px-3 py-1 rounded-md"
+                              >
+                                Hide out of stock flavors
+                              </button>
+                            </>
+                          )}
+                        </div>
+                      )
+                    })()
+                  )}
                 </div>
               </CardBody>
             </Card>
