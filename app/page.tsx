@@ -139,7 +139,7 @@ export default function Home() {
           <div className="w-full flex justify-center mb-2">
             {/* decorative looping gif */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/24r.gif" alt="shh" className="h-10 w-10" />
+            <img src="/24r.gif" alt="shh" className="h-20 w-auto object-contain" />
           </div>
           <p className="text-gray-400 text-sm">your secret go to vape list</p>
         </div>
