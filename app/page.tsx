@@ -176,11 +176,11 @@ export default function Home() {
         </div>
 
         {/* Product Cards */}
-        <div className="space-y-6">
+        <div className="space-y-6 max-w-screen-sm mx-auto">
           {products.map((product) => (
             // Skip rendering standalone pod card; it's shown inside the kit card
             product.id === 'fogger_switch_pod' ? null : (
-            <Card key={product.id} id={`product-${product.id}`} className={`bg-gray-900 border-gray-800 ${product.id === 'fogger_switch_pro_kit' ? 'rgb-border-card' : ''}`}
+            <Card key={product.id} id={`product-${product.id}`} className={`bg-gray-900 border-gray-800 ${product.id === 'fogger_switch_pro_kit' ? 'rgb-border-card' : ''}`}>
               <CardHeader className="flex flex-col gap-4 pb-4">
                 <div className="w-full aspect-square relative border-2 border-gray-600 rounded-lg overflow-hidden bg-gray-800">
                   {product.id === 'viho_trx_50k' && (
@@ -189,11 +189,14 @@ export default function Home() {
                     </span>
                   )}
                   {product.id === 'fogger_switch_pro_kit' && (
-                    <span className="absolute top-2 left-2 z-10 hot-seller-badge text-white text-[10px] font-bold px-2 py-1 rounded-md shadow inline-flex items-center gap-1">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src="/512.gif" alt="fire" className="h-3 w-3 object-contain" />
-                      HOT SELLER
-                    </span>
+                    <>
+                      <span className="absolute top-2 left-2 z-10 new-rainbow-badge text-white text-[10px] font-bold px-2 py-1 rounded-md shadow">NEW</span>
+                      <span className="absolute top-2 left-20 z-10 hot-seller-badge text-white text-[10px] font-bold px-2 py-1 rounded-md shadow inline-flex items-center gap-1">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src="/512.gif" alt="fire" className="h-3 w-3 object-contain" />
+                        HOT SELLER
+                      </span>
+                    </>
                   )}
                    {product.id === 'hyde_iq' && (
                     <span className="absolute top-2 left-2 z-10 flash-sale-badge text-white text-[10px] font-bold px-2 py-1 rounded-md shadow">
