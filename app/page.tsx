@@ -180,7 +180,8 @@ export default function Home() {
           {products.map((product) => (
             // Skip rendering standalone pod card; it's shown inside the kit card
             product.id === 'fogger_switch_pod' ? null : (
-            <Card key={product.id} id={`product-${product.id}`} className={`bg-gray-900 border-gray-800 ${product.id === 'fogger_switch_pro_kit' ? 'rgb-border-card' : ''}`}>
+            <div key={product.id} id={`product-${product.id}`} className={`${product.id === 'fogger_switch_pro_kit' ? 'rgb-border-wrap p-[2px]' : ''} rounded-xl`}>
+            <Card className={`bg-gray-900 border-gray-800 rounded-xl`}>
               <CardHeader className="flex flex-col gap-4 pb-4">
                 <div className="w-full aspect-square relative border-2 border-gray-600 rounded-lg overflow-hidden bg-gray-800">
                   {product.id === 'viho_trx_50k' && (
@@ -400,6 +401,7 @@ export default function Home() {
                 </div>
               </CardBody>
             </Card>
+            </div>
             )
           ))}
         </div>

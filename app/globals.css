@@ -90,3 +90,11 @@ body {
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+
+/* Preferred: wrapper-based RGB border that preserves normal inner background */
+.rgb-border-wrap {
+  background: linear-gradient(270deg, #ff6b6b, #f7d794, #1dd1a1, #48dbfb, #5f27cd, #ff6b6b);
+  background-size: 600% 600%;
+  animation: rgb-border-flow 8s linear infinite;
+  border-radius: 0.75rem; /* matches card rounded */
+}
