@@ -144,8 +144,8 @@ export default function Home() {
           </h1>
           {/* Sell Out Sale banner */}
           <div className="mt-4">
-            <div className="bg-gradient-to-r from-red-600 via-yellow-500 to-orange-500 p-[2px] rounded-xl inline-block">
-              <div className="bg-gray-900 rounded-xl px-4 py-3 text-left">
+            <div className="bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 p-[2px] rounded-xl w-full max-w-none">
+              <div className="bg-gray-900 rounded-xl px-4 py-3 text-left w-full">
                 <p className="text-sm font-bold tracking-wide text-white text-center">SELL OUT SALE</p>
                 <div className="mt-3 space-y-2">
                   <div className="flex items-center justify-between gap-4">
@@ -153,21 +153,21 @@ export default function Home() {
                       <p className="text-sm text-white font-medium">Hyde IQ</p>
                       <p className="text-xs text-green-400">$2.50</p>
                     </div>
-                    <button onClick={() => scrollToProduct('hyde_iq')} className="text-xs bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-md">View</button>
+                    <button onClick={() => scrollToProduct('hyde_iq')} className="text-xs bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-3 py-1 rounded-md">View</button>
                   </div>
                   <div className="flex items-center justify-between gap-4">
                     <div>
                       <p className="text-sm text-white font-medium">Tyson Heavyweight</p>
                       <p className="text-xs text-green-400">$5.00</p>
                     </div>
-                    <button onClick={() => scrollToProduct('tyson_heavyweight')} className="text-xs bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-md">View</button>
+                    <button onClick={() => scrollToProduct('tyson_heavyweight')} className="text-xs bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-3 py-1 rounded-md">View</button>
                   </div>
                   <div className="flex items-center justify-between gap-4">
                     <div>
                       <p className="text-sm text-white font-medium">Mood Bar Air</p>
                       <p className="text-xs text-green-400">$5.00</p>
                     </div>
-                    <button onClick={() => scrollToProduct('mood_bar_air')} className="text-xs bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-md">View</button>
+                    <button onClick={() => scrollToProduct('mood_bar_air')} className="text-xs bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-3 py-1 rounded-md">View</button>
                   </div>
                 </div>
               </div>
