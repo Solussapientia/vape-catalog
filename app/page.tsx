@@ -146,7 +146,6 @@ export default function Home() {
           <div className="mt-4 max-w-screen-sm mx-auto">
             <div className="relative rounded-lg border-2 border-gray-800 overflow-hidden">
               <div className="absolute inset-0 bg-[url('/4refw.gif')] bg-cover bg-center" />
-              <div className="absolute inset-0 bg-black/50" />
               <div className="relative px-4 py-4 text-left">
                 <p className="text-base font-extrabold tracking-wide text-white text-center drop-shadow">SELL OUT SALE</p>
                 <div className="mt-3 space-y-3">
