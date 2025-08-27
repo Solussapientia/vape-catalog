@@ -46,6 +46,12 @@ export default function Home() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [showOutOfStockMap, setShowOutOfStockMap] = useState<Record<string, boolean>>({})
+  const scrollToProduct = (id: string) => {
+    const el = document.getElementById(`product-${id}`)
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
 
   useEffect(() => {
     fetchProducts()
@@ -136,12 +142,37 @@ export default function Home() {
           <h1 className="text-4xl font-bold mb-2 rainbow-title bg-clip-text text-transparent">
             VAPE LIST
           </h1>
-          <div className="w-full flex justify-center mb-2">
-            {/* decorative looping gif */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/24r.gif" alt="shh" className="h-20 w-auto object-contain" />
+          {/* Sell Out Sale banner */}
+          <div className="mt-4">
+            <div className="bg-gradient-to-r from-red-600 via-yellow-500 to-orange-500 p-[2px] rounded-xl inline-block">
+              <div className="bg-gray-900 rounded-xl px-4 py-3 text-left">
+                <p className="text-sm font-bold tracking-wide text-white text-center">SELL OUT SALE</p>
+                <div className="mt-3 space-y-2">
+                  <div className="flex items-center justify-between gap-4">
+                    <div>
+                      <p className="text-sm text-white font-medium">Hyde IQ</p>
+                      <p className="text-xs text-green-400">$2.50</p>
+                    </div>
+                    <button onClick={() => scrollToProduct('hyde_iq')} className="text-xs bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-md">View</button>
+                  </div>
+                  <div className="flex items-center justify-between gap-4">
+                    <div>
+                      <p className="text-sm text-white font-medium">Tyson Heavyweight</p>
+                      <p className="text-xs text-green-400">$5.00</p>
+                    </div>
+                    <button onClick={() => scrollToProduct('tyson_heavyweight')} className="text-xs bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-md">View</button>
+                  </div>
+                  <div className="flex items-center justify-between gap-4">
+                    <div>
+                      <p className="text-sm text-white font-medium">Mood Bar Air</p>
+                      <p className="text-xs text-green-400">$5.00</p>
+                    </div>
+                    <button onClick={() => scrollToProduct('mood_bar_air')} className="text-xs bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-md">View</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <p className="text-gray-300 text-lg md:text-xl font-semibold tracking-wide uppercase">your secret go to vape list</p>
         </div>
 
         {/* Product Cards */}
@@ -149,7 +180,7 @@ export default function Home() {
           {products.map((product) => (
             // Skip rendering standalone pod card; it's shown inside the kit card
             product.id === 'fogger_switch_pod' ? null : (
-            <Card key={product.id} className="bg-gray-900 border-gray-800">
+            <Card key={product.id} id={`product-${product.id}`} className="bg-gray-900 border-gray-800">
               <CardHeader className="flex flex-col gap-4 pb-4">
                 <div className="w-full aspect-square relative border-2 border-gray-600 rounded-lg overflow-hidden bg-gray-800">
                   {product.id === 'viho_trx_50k' && (
