@@ -190,14 +190,14 @@ export default function Home() {
                     </span>
                   )}
                   {product.id === 'fogger_switch_pro_kit' && (
-                    <>
-                      <span className="absolute top-2 left-2 z-10 new-rainbow-badge text-white text-[10px] font-bold px-2 py-1 rounded-md shadow">NEW</span>
-                      <span className="absolute top-2 left-20 z-10 hot-seller-badge text-white text-[10px] font-bold px-2 py-1 rounded-md shadow inline-flex items-center gap-1">
+                    <div className="absolute top-2 left-2 z-10 inline-flex items-center gap-2">
+                      <span className="new-rainbow-badge text-white text-[10px] font-bold px-2 py-1 rounded-md shadow">NEW</span>
+                      <span className="hot-seller-badge text-white text-[10px] font-bold px-2 py-1 rounded-md shadow inline-flex items-center gap-1">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src="/512.gif" alt="fire" className="h-3 w-3 object-contain" />
                         HOT SELLER
                       </span>
-                    </>
+                    </div>
                   )}
                    {product.id === 'hyde_iq' && (
                     <span className="absolute top-2 left-2 z-10 flash-sale-badge text-white text-[10px] font-bold px-2 py-1 rounded-md shadow">
