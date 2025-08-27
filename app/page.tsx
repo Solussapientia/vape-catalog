@@ -145,7 +145,7 @@ export default function Home() {
           {/* Sell Out Sale banner */}
           <div className="mt-4">
             <div className="bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 p-[2px] rounded-xl w-full max-w-none">
-              <div className="bg-gray-900 rounded-xl px-4 py-3 text-left w-full">
+              <div className="rounded-xl px-4 py-3 text-left w-full" style={{ backgroundImage: 'url(/4refw.gif)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
                 <p className="text-sm font-bold tracking-wide text-white text-center">SELL OUT SALE</p>
                 <div className="mt-3 space-y-2">
                   <div className="flex items-center justify-between gap-4">
