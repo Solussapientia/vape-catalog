@@ -20,7 +20,7 @@ async function run() {
       id: 'fogger_switch_pro_kit',
       name: 'Fogger switch pro kit',
       puffs: '30,000',
-      price: '$30.00',
+      price: '$25.00',
       image_name: 'ref.jpg',
       // Make kit the earliest so Fogger card renders first
       created_at: '1989-01-01T00:00:00.000Z',
@@ -48,7 +48,7 @@ async function run() {
       id: 'fogger_switch_pod',
       name: 'Fogger switch pod',
       puffs: '30,000',
-      price: '$20.00',
+      price: '$15.00',
       image_name: 'ref.jpg',
       created_at: '1989-01-01T00:00:00.000Z',
     }
