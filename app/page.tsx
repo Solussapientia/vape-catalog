@@ -143,31 +143,33 @@ export default function Home() {
             VAPE LIST
           </h1>
           {/* Sell Out Sale banner */}
-          <div className="mt-4">
-            <div className="bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 p-[2px] rounded-xl w-full max-w-none">
-              <div className="rounded-xl px-4 py-3 text-left w-full" style={{ backgroundImage: 'url(/4refw.gif)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-                <p className="text-sm font-bold tracking-wide text-white text-center">SELL OUT SALE</p>
-                <div className="mt-3 space-y-2">
-                  <div className="flex items-center justify-between gap-4">
+          <div className="mt-4 max-w-screen-sm mx-auto">
+            <div className="relative rounded-lg border-2 border-gray-800 overflow-hidden">
+              <div className="absolute inset-0 bg-[url('/4refw.gif')] bg-cover bg-center" />
+              <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]" />
+              <div className="relative px-4 py-4 text-left">
+                <p className="text-base font-extrabold tracking-wide text-white text-center drop-shadow">SELL OUT SALE</p>
+                <div className="mt-3 space-y-3">
+                  <div className="flex items-center justify-between gap-4 rounded-md border border-white/10 bg-white/5 hover:bg-white/10 transition-colors px-3 py-2">
                     <div>
-                      <p className="text-sm text-white font-medium">Hyde IQ</p>
-                      <p className="text-xs text-green-400">$2.50</p>
+                      <p className="text-white font-medium">Hyde IQ</p>
+                      <p className="text-amber-300 text-sm font-semibold">$2.50</p>
                     </div>
-                    <button onClick={() => scrollToProduct('hyde_iq')} className="text-xs bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-3 py-1 rounded-md">View</button>
+                    <button onClick={() => scrollToProduct('hyde_iq')} className="text-xs font-semibold text-white/90 bg-white/10 hover:bg-white/20 border border-white/20 px-3 py-1 rounded-md">View</button>
                   </div>
-                  <div className="flex items-center justify-between gap-4">
+                  <div className="flex items-center justify-between gap-4 rounded-md border border-white/10 bg-white/5 hover:bg-white/10 transition-colors px-3 py-2">
                     <div>
-                      <p className="text-sm text-white font-medium">Tyson Heavyweight</p>
-                      <p className="text-xs text-green-400">$5.00</p>
+                      <p className="text-white font-medium">Tyson Heavyweight</p>
+                      <p className="text-amber-300 text-sm font-semibold">$5.00</p>
                     </div>
-                    <button onClick={() => scrollToProduct('tyson_heavyweight')} className="text-xs bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-3 py-1 rounded-md">View</button>
+                    <button onClick={() => scrollToProduct('tyson_heavyweight')} className="text-xs font-semibold text-white/90 bg-white/10 hover:bg-white/20 border border-white/20 px-3 py-1 rounded-md">View</button>
                   </div>
-                  <div className="flex items-center justify-between gap-4">
+                  <div className="flex items-center justify-between gap-4 rounded-md border border-white/10 bg-white/5 hover:bg-white/10 transition-colors px-3 py-2">
                     <div>
-                      <p className="text-sm text-white font-medium">Mood Bar Air</p>
-                      <p className="text-xs text-green-400">$5.00</p>
+                      <p className="text-white font-medium">Mood Bar Air</p>
+                      <p className="text-amber-300 text-sm font-semibold">$5.00</p>
                     </div>
-                    <button onClick={() => scrollToProduct('mood_bar_air')} className="text-xs bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-3 py-1 rounded-md">View</button>
+                    <button onClick={() => scrollToProduct('mood_bar_air')} className="text-xs font-semibold text-white/90 bg-white/10 hover:bg-white/20 border border-white/20 px-3 py-1 rounded-md">View</button>
                   </div>
                 </div>
               </div>
