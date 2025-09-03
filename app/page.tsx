@@ -30,7 +30,8 @@ function getImagePath(imageName: string): string {
     'S.jpg': '/S.jpg',
     'T': '/T.webp',
     'hyde': '/hyde.webp',
-    'VIHO_Thumbnail__46533.png': '/VIHO_Thumbnail__46533.png'
+    'VIHO_Thumbnail__46533.png': '/VIHO_Thumbnail__46533.png',
+    'r3pif.png': '/r3pif.png'
   }
 
   // If the DB provides a concrete filename with an extension, use it directly (trimmed)
@@ -46,6 +47,9 @@ export default function Home() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [showOutOfStockMap, setShowOutOfStockMap] = useState<Record<string, boolean>>({})
+  const [showNotificationModal, setShowNotificationModal] = useState(false)
+  const [phoneNumber, setPhoneNumber] = useState('')
+  const [notificationStatus, setNotificationStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const scrollToProduct = (id: string) => {
     const el = document.getElementById(`product-${id}`)
     if (el) {
@@ -89,6 +93,10 @@ export default function Home() {
           return { ...product, flavors: sortedFlavors }
         })
         .sort((a: VapeProduct, b: VapeProduct) => {
+          // Pulse Bar Pro always comes first
+          if (a.id === 'pulse_bar_pro') return -1
+          if (b.id === 'pulse_bar_pro') return 1
+          
           const aHasStock = Array.isArray(a.flavors) && a.flavors.some((f: Flavor) => f.in_stock)
           const bHasStock = Array.isArray(b.flavors) && b.flavors.some((f: Flavor) => f.in_stock)
           if (aHasStock !== bHasStock) return aHasStock ? -1 : 1
@@ -104,6 +112,44 @@ export default function Home() {
       setError('Failed to load products')
     } finally {
       setLoading(false)
+    }
+  }
+
+  async function handleNotificationSubmit() {
+    if (!phoneNumber || phoneNumber.length < 10) {
+      alert('Please enter a valid phone number')
+      return
+    }
+
+    setNotificationStatus('loading')
+    
+    try {
+      const { error } = await supabase
+        .from('notifications')
+        .insert({
+          product_id: 'pulse_bar_pro',
+          phone_number: phoneNumber
+        })
+
+      if (error) {
+        // If it's a unique constraint error, the user is already signed up
+        if (error.code === '23505') {
+          alert('This phone number is already registered for notifications!')
+        } else {
+          throw error
+        }
+      } else {
+        setNotificationStatus('success')
+        setTimeout(() => {
+          setShowNotificationModal(false)
+          setPhoneNumber('')
+          setNotificationStatus('idle')
+        }, 2000)
+      }
+    } catch (err) {
+      console.error('Error saving notification:', err)
+      setNotificationStatus('error')
+      alert('Failed to save notification. Please try again.')
     }
   }
 
@@ -149,10 +195,15 @@ export default function Home() {
           {products.map((product) => (
             // Skip rendering standalone pod card; it's shown inside the kit card
             product.id === 'fogger_switch_pod' ? null : (
-            <div key={product.id} id={`product-${product.id}`} className={`${product.id === 'fogger_switch_pro_kit' ? 'rgb-border-wrap p-[2px]' : ''} rounded-xl`}>
+            <div key={product.id} id={`product-${product.id}`} className={`${product.id === 'fogger_switch_pro_kit' ? 'rgb-border-wrap p-[2px]' : product.id === 'pulse_bar_pro' ? 'pulse-bar-pro-border p-[2px]' : ''} rounded-xl`}>
             <Card className={`bg-gray-900 border-gray-800 rounded-xl`}>
               <CardHeader className="flex flex-col gap-4 pb-4">
                 <div className="w-full aspect-square relative border-2 border-gray-600 rounded-lg overflow-hidden bg-gray-800">
+                  {product.id === 'pulse_bar_pro' && (
+                    <span className="absolute top-2 left-2 z-10 new-rainbow-badge text-white text-[10px] font-bold px-2 py-1 rounded-md shadow">
+                      NEW ARRIVAL
+                    </span>
+                  )}
                   {product.id === 'viho_trx_50k' && (
                     <span className="absolute top-2 left-2 z-10 new-rainbow-badge text-white text-[10px] font-bold px-2 py-1 rounded-md shadow">
                       NEW
@@ -308,6 +359,24 @@ export default function Home() {
                         </div>
                       )
                     })()
+                  ) : product.id === 'pulse_bar_pro' ? (
+                    // Special "Coming Soon" section for Pulse Bar Pro
+                    <div className="text-center space-y-4">
+                      <div className="py-8">
+                        <p className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 mb-4">
+                          FLAVORS COMING SOON
+                        </p>
+                        <p className="text-sm text-gray-400 mb-6">
+                          Be the first to know when flavors are available!
+                        </p>
+                        <button
+                          onClick={() => setShowNotificationModal(true)}
+                          className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-3 rounded-lg font-semibold transition-all transform hover:scale-105 shadow-lg"
+                        >
+                          🔔 Notify Me When Available
+                        </button>
+                      </div>
+                    </div>
                   ) : (
                     (() => {
                       const flavors = product.flavors || []
@@ -375,6 +444,57 @@ export default function Home() {
           ))}
         </div>
       </div>
+
+      {/* Notification Modal */}
+      {showNotificationModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
+          <div className="bg-gray-900 rounded-xl p-6 max-w-md w-full border border-purple-500/30">
+            <h2 className="text-2xl font-bold text-white mb-4">
+              Get Notified! 🔔
+            </h2>
+            <p className="text-gray-300 mb-6">
+              Enter your phone number and we'll text you when PULSE BAR PRO flavors are in stock!
+            </p>
+            
+            <input
+              type="tel"
+              placeholder="Enter phone number (e.g., 555-123-4567)"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 mb-4"
+              disabled={notificationStatus === 'loading'}
+            />
+            
+            <div className="flex gap-3">
+              <button
+                onClick={handleNotificationSubmit}
+                disabled={notificationStatus === 'loading'}
+                className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-4 py-3 rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              >
+                {notificationStatus === 'loading' ? 'Saving...' : 
+                 notificationStatus === 'success' ? '✓ Saved!' : 'Notify Me'}
+              </button>
+              <button
+                onClick={() => {
+                  setShowNotificationModal(false)
+                  setPhoneNumber('')
+                  setNotificationStatus('idle')
+                }}
+                disabled={notificationStatus === 'loading'}
+                className="px-6 py-3 bg-gray-800 hover:bg-gray-700 text-white rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              >
+                Cancel
+              </button>
+            </div>
+            
+            {notificationStatus === 'success' && (
+              <p className="text-green-400 text-sm mt-4 text-center">
+                ✓ You'll be notified when flavors are available!
+              </p>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   )
 } 

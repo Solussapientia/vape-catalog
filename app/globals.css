@@ -98,3 +98,17 @@ body {
   animation: rgb-border-flow 8s linear infinite;
   border-radius: 0.75rem; /* matches card rounded */
 }
+
+/* Special purple-pink animated border for Pulse Bar Pro */
+.pulse-bar-pro-border {
+  background: linear-gradient(270deg, #a855f7, #ec4899, #8b5cf6, #d946ef, #a855f7);
+  background-size: 600% 600%;
+  animation: pulse-border-flow 6s linear infinite;
+  border-radius: 0.75rem;
+}
+
+@keyframes pulse-border-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
