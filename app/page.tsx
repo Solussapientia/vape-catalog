@@ -282,7 +282,7 @@ export default function Home() {
                 ) : null}
               </CardHeader>
               <CardBody className="pt-0">
-                <div className="mb-3">
+                <div className={product.id === 'pulse_bar_pro' ? '' : 'mb-3'}>
                   {/* For Fogger Switch Pro, render: title+puffs+price+warning+flavors for kit, then for pod */}
                   {product.id === 'fogger_switch_pro_kit' ? (
                     (() => {
@@ -365,14 +365,14 @@ export default function Home() {
                       )
                     })()
                   ) : product.id === 'pulse_bar_pro' ? (
-                    // Ultra compact "Coming Soon" section for Pulse Bar Pro
-                    <div className="text-center py-2">
-                      <p className="text-sm font-semibold text-purple-400 mb-1">
+                    // Compact "Coming Soon" section with bigger button
+                    <div className="text-center py-1">
+                      <p className="text-sm font-semibold text-purple-400 mb-2">
                         Flavors Coming Soon
                       </p>
                       <button
                         onClick={() => setShowNotificationModal(true)}
-                        className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-3 py-1.5 rounded-md text-xs font-medium transition-all shadow"
+                        className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-5 py-2 rounded-lg text-sm font-semibold transition-all transform hover:scale-105 shadow-lg"
                       >
                         Get Notified
                       </button>
