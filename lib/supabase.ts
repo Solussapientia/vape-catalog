@@ -21,6 +21,7 @@ export interface Flavor {
   product_id: string
   name: string
   in_stock: boolean
+  description?: string
   created_at?: string
   updated_at?: string
 }

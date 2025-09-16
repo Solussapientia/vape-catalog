@@ -4,6 +4,7 @@ import { Card, CardBody, CardHeader } from '@heroui/react'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { supabase, Product, Flavor } from '../lib/supabase'
+import FlavorInfoModal from '../components/FlavorInfoModal'
 
 interface VapeProduct extends Product {
   flavors: Flavor[]
@@ -50,6 +51,7 @@ export default function Home() {
   const [showNotificationModal, setShowNotificationModal] = useState(false)
   const [phoneNumber, setPhoneNumber] = useState('')
   const [notificationStatus, setNotificationStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [selectedFlavor, setSelectedFlavor] = useState<{ flavor: Flavor, productName: string } | null>(null)
   const scrollToProduct = (id: string) => {
     const el = document.getElementById(`product-${id}`)
     if (el) {
@@ -310,6 +312,15 @@ export default function Home() {
                                   <div key={flavor.id} className="flex items-center gap-2 text-xs">
                                     <div className="w-2 h-2 rounded-full bg-green-500" />
                                     <span className="text-gray-300">{flavor.name}</span>
+                                    <button
+                                      onClick={() => setSelectedFlavor({ flavor, productName: 'Fogger switch pro kit' })}
+                                      className="text-gray-400 hover:text-blue-400 transition-colors ml-1 flavor-info-icon"
+                                      aria-label="Flavor info"
+                                    >
+                                      <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                                      </svg>
+                                    </button>
                                     <span className="text-xs text-green-400">In Stock</span>
                                   </div>
                                 ))}
@@ -320,6 +331,15 @@ export default function Home() {
                                   <div key={flavor.id} className="flex items-center gap-2 text-xs">
                                     <div className="w-2 h-2 rounded-full bg-red-500" />
                                     <span className="text-gray-300">{flavor.name}</span>
+                                    <button
+                                      onClick={() => setSelectedFlavor({ flavor, productName: 'Fogger switch pro kit' })}
+                                      className="text-gray-400 hover:text-blue-400 transition-colors ml-1 flavor-info-icon"
+                                      aria-label="Flavor info"
+                                    >
+                                      <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                                      </svg>
+                                    </button>
                                     <span className="text-xs text-red-400">Out of Stock</span>
                                   </div>
                                 ))}
@@ -347,6 +367,15 @@ export default function Home() {
                                   <div key={flavor.id} className="flex items-center gap-2 text-xs">
                                     <div className="w-2 h-2 rounded-full bg-green-500" />
                                     <span className="text-gray-300">{flavor.name}</span>
+                                    <button
+                                      onClick={() => setSelectedFlavor({ flavor, productName: 'Fogger switch pod' })}
+                                      className="text-gray-400 hover:text-blue-400 transition-colors ml-1 flavor-info-icon"
+                                      aria-label="Flavor info"
+                                    >
+                                      <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                                      </svg>
+                                    </button>
                                     <span className="text-xs text-green-400">In Stock</span>
                                   </div>
                                 ))}
@@ -356,6 +385,15 @@ export default function Home() {
                                   <div key={flavor.id} className="flex items-center gap-2 text-xs">
                                     <div className="w-2 h-2 rounded-full bg-red-500" />
                                     <span className="text-gray-300">{flavor.name}</span>
+                                    <button
+                                      onClick={() => setSelectedFlavor({ flavor, productName: 'Fogger switch pod' })}
+                                      className="text-gray-400 hover:text-blue-400 transition-colors ml-1 flavor-info-icon"
+                                      aria-label="Flavor info"
+                                    >
+                                      <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                                      </svg>
+                                    </button>
                                     <span className="text-xs text-red-400">Out of Stock</span>
                                   </div>
                                 ))}
@@ -391,6 +429,15 @@ export default function Home() {
                               <div key={flavor.id} className="flex items-center gap-2 text-xs">
                                 <div className={`w-2 h-2 rounded-full ${flavor.in_stock ? 'bg-green-500' : 'bg-red-500'}`} />
                                 <span className="text-gray-300">{flavor.name}</span>
+                                <button
+                                  onClick={() => setSelectedFlavor({ flavor, productName: product.name })}
+                                  className="text-gray-400 hover:text-blue-400 transition-colors ml-1 flavor-info-icon"
+                                  aria-label="Flavor info"
+                                >
+                                  <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                                  </svg>
+                                </button>
                                 <span className={`text-xs ${flavor.in_stock ? 'text-green-400' : 'text-red-400'}`}>
                                   {flavor.in_stock ? 'In Stock' : 'Out of Stock'}
                                 </span>
@@ -417,6 +464,15 @@ export default function Home() {
                                 <div key={flavor.id} className="flex items-center gap-2 text-xs">
                                   <div className={`w-2 h-2 rounded-full ${flavor.in_stock ? 'bg-green-500' : 'bg-red-500'}`} />
                                   <span className="text-gray-300">{flavor.name}</span>
+                                  <button
+                                    onClick={() => setSelectedFlavor({ flavor, productName: product.name })}
+                                    className="text-gray-400 hover:text-blue-400 transition-colors ml-1 flavor-info-icon"
+                                    aria-label="Flavor info"
+                                  >
+                                    <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                      <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                                    </svg>
+                                  </button>
                                   <span className={`text-xs ${flavor.in_stock ? 'text-green-400' : 'text-red-400'}`}>
                                     {flavor.in_stock ? 'In Stock' : 'Out of Stock'}
                                   </span>
@@ -488,6 +544,15 @@ export default function Home() {
           </div>
         </div>
       )}
+
+      {/* Flavor Info Modal */}
+      <FlavorInfoModal
+        isOpen={selectedFlavor !== null}
+        onClose={() => setSelectedFlavor(null)}
+        flavorName={selectedFlavor?.flavor.name || ''}
+        productName={selectedFlavor?.productName || ''}
+        description={selectedFlavor?.flavor.description}
+      />
     </div>
   )
 } 
