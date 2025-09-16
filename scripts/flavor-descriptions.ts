@@ -402,6 +402,102 @@ export const flavorDescriptions: Record<string, Record<string, string>> = {
     'Tropical': 'Hyde\'s tropical fruit medley.',
   },
 
+  // RYL Classic by RAZZ
+  ryl: {
+    'Blue raz ice': 'RYL\'s signature blue raspberry with premium ice blend.',
+    'Watermelon ice': 'Classic watermelon with RYL\'s cooling formula.',
+    'Triple berry': 'Three-berry blend exclusive to RYL Classic.',
+    'Miami mint': 'RYL\'s take on the legendary Miami mint.',
+    'Night crawler': 'RYL\'s mysterious dark berry blend for night vaping.',
+    'Icy mint': 'Pure icy mint with maximum cooling effect.',
+    'White yummy ice': 'White gummy candy with ice crystals.',
+    'Raspberry watermelon': 'Tart raspberry meets sweet watermelon.',
+    'Sour strawberry': 'Strawberry with intense sour coating.',
+    'Dragonfruit lemonade': 'Exotic dragon fruit mixed with lemonade.',
+    'Rainbow': 'Rainbow candy with multiple fruit flavors.',
+    'Sour apple': 'Green apple with sour candy coating.',
+    'Orange mango': 'Citrus orange meets tropical mango.',
+    'Peach passion fruit': 'Southern peach with exotic passion fruit.',
+    'Blue razz bliss': 'Blissful blue raspberry experience.',
+    'Wild berry dew': 'Wild berries with mountain dew freshness.',
+    'Banana ice': 'Creamy banana with cooling finish.',
+    'Sour apple ice': 'Sour apple with double ice effect.',
+  },
+
+  // Razz Mega additional flavors
+  razz_mega_extra: {
+    'New York mint': 'Big Apple-inspired mint blend with urban coolness.',
+    'White grape gush': 'Gushing white grape with candy sweetness.',
+    'Polar ice': 'Arctic-level menthol for extreme cooling.',
+    'Vicky': 'Razz\'s mysterious Vicky blend with secret fruits.',
+  },
+
+  // Lost Mary MT15000 additional flavors
+  lmmt15000_extra: {
+    'Pure': 'Clean, unflavored vapor for pure experience.',
+    'Watermelon ice': 'Classic watermelon with MT15000 cooling.',
+    'Raspberry banana': 'Tart raspberry with creamy banana.',
+    'Winter mint': 'Seasonal mint blend with winter freshness.',
+    'Strawberry banana': 'Classic smoothie combination.',
+    'Rocket popsicle': 'Red, white, and blue popsicle recreation.',
+    'Dr. Cherry': 'Doctor-inspired cherry soda flavor.',
+  },
+
+  // Viho Supercharge Pro additional flavors
+  viho_sp_extra: {
+    'clear': 'Pure, unflavored Supercharge Pro experience.',
+    'watermelon rollz': 'Watermelon fruit roll candy recreation.',
+    'strawberry lemonade': 'Sweet strawberry mixed with tart lemonade.',
+    'Sour skittles': 'Sour version of rainbow candy.',
+    'Lemon drop': 'Classic lemon drop hard candy.',
+  },
+
+  // Viho Supercharge additional flavors
+  viho_s_extra: {
+    'crispy apple berry': 'Crisp apple with mixed berry blend.',
+  },
+
+  // Viho Turbo additional flavors
+  viho_turbo_extra: {
+    'Dragon fruit watermelon': 'Exotic dragon fruit meets summer watermelon.',
+    'Watermelon berries': 'Watermelon enhanced with mixed berries.',
+    'Grape bubble gum': 'Purple grape bubblegum nostalgia.',
+  },
+
+  // Hyde 3300 additional flavors
+  hyde_3300_extra: {
+    'Berry ice cream': 'Mixed berry ice cream dessert.',
+    'Really Blueberry': 'Intense blueberry flavor that\'s really blue.',
+    'Watermelon ice cream': 'Watermelon ice cream bar recreation.',
+    'Pink drink': 'Pink beverage-inspired blend.',
+    'Energize': 'Energy drink-inspired flavor blend.',
+  },
+
+  // Geek Bar Pulse additional flavors
+  pulse_extra: {
+    'B burst': 'Mystery B-flavor burst explosion.',
+    'Sour apple ice': 'Sour green apple with Pulse cooling.',
+  },
+
+  // Adjust additional flavors
+  adjust_extra: {
+    'Black razz baja': 'Black raspberry with Baja blast inspiration.',
+  },
+
+  // Lost Mary MO5000 additional flavors
+  mo5000_extra: {
+    'Black Mint': 'Dark mint variety with unique cooling.',
+    'Blue Razz Ice': 'MO5000\'s blue raspberry ice blend.',
+    'Citrus sunrise': 'Morning citrus blend with energy.',
+    'Alphonso mango ice': 'Premium Alphonso mango with cooling.',
+    'Ginger beer': 'Spicy ginger beer soda recreation.',
+  },
+
+  // VIHO Supercharge Nicotine Free
+  viho_supercharge_nicfree: {
+    // This product might not have flavors yet or uses same as regular Supercharge
+  },
+
   // Additional products
   viho_trx_50k: {
     'Lemon Refresher': 'Zesty lemon citrus with a refreshing twist, VIHO TRX\'s take on summer refreshment.',
@@ -525,9 +621,5 @@ export const flavorDescriptions: Record<string, Record<string, string>> = {
   
   pulse_bar_pro: {
     // Flavors coming soon - no descriptions needed yet
-  },
-  
-  ryl: {
-    // RYL Classic flavors if needed
   },
 };

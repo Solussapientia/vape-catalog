@@ -38,9 +38,30 @@ async function populateFlavorDescriptions() {
     
     // Process each product
     for (const product of products) {
-      const productDescriptions = flavorDescriptions[product.id]
+      let productDescriptions = flavorDescriptions[product.id]
       
-      if (!productDescriptions) {
+      // Check for additional flavor descriptions in extra sections
+      const extraMappings: Record<string, string> = {
+        'razz_mega': 'razz_mega_extra',
+        'lmmt15000': 'lmmt15000_extra',
+        'viho_sp': 'viho_sp_extra',
+        'viho_s': 'viho_s_extra',
+        'viho_turbo': 'viho_turbo_extra',
+        'hyde_3300': 'hyde_3300_extra',
+        'pulse': 'pulse_extra',
+        'adjust': 'adjust_extra',
+        'mo5000': 'mo5000_extra',
+      }
+      
+      // Merge extra descriptions if they exist
+      if (extraMappings[product.id] && flavorDescriptions[extraMappings[product.id]]) {
+        productDescriptions = {
+          ...productDescriptions,
+          ...flavorDescriptions[extraMappings[product.id] as keyof typeof flavorDescriptions]
+        }
+      }
+      
+      if (!productDescriptions || Object.keys(productDescriptions).length === 0) {
         console.log(`⚠️  No descriptions found for product: ${product.name} (${product.id})`)
         continue
       }
