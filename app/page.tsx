@@ -312,6 +312,7 @@ export default function Home() {
                                   <div key={flavor.id} className="flex items-center gap-2 text-xs">
                                     <div className="w-2 h-2 rounded-full bg-green-500" />
                                     <span className="text-gray-300">{flavor.name}</span>
+                                    <span className="text-xs text-green-400">In Stock</span>
                                     <button
                                       onClick={() => setSelectedFlavor({ flavor, productName: 'Fogger switch pro kit' })}
                                       className="text-gray-400 hover:text-blue-400 transition-colors ml-1 flavor-info-icon"
@@ -321,7 +322,6 @@ export default function Home() {
                                         <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                                       </svg>
                                     </button>
-                                    <span className="text-xs text-green-400">In Stock</span>
                                   </div>
                                 ))}
                               {/* Out of stock */}
@@ -331,6 +331,7 @@ export default function Home() {
                                   <div key={flavor.id} className="flex items-center gap-2 text-xs">
                                     <div className="w-2 h-2 rounded-full bg-red-500" />
                                     <span className="text-gray-300">{flavor.name}</span>
+                                    <span className="text-xs text-red-400">Out of Stock</span>
                                     <button
                                       onClick={() => setSelectedFlavor({ flavor, productName: 'Fogger switch pro kit' })}
                                       className="text-gray-400 hover:text-blue-400 transition-colors ml-1 flavor-info-icon"
@@ -340,7 +341,6 @@ export default function Home() {
                                         <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                                       </svg>
                                     </button>
-                                    <span className="text-xs text-red-400">Out of Stock</span>
                                   </div>
                                 ))}
                             </div>
@@ -367,6 +367,7 @@ export default function Home() {
                                   <div key={flavor.id} className="flex items-center gap-2 text-xs">
                                     <div className="w-2 h-2 rounded-full bg-green-500" />
                                     <span className="text-gray-300">{flavor.name}</span>
+                                    <span className="text-xs text-green-400">In Stock</span>
                                     <button
                                       onClick={() => setSelectedFlavor({ flavor, productName: 'Fogger switch pod' })}
                                       className="text-gray-400 hover:text-blue-400 transition-colors ml-1 flavor-info-icon"
@@ -376,7 +377,6 @@ export default function Home() {
                                         <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                                       </svg>
                                     </button>
-                                    <span className="text-xs text-green-400">In Stock</span>
                                   </div>
                                 ))}
                               {podFlavors
@@ -385,6 +385,7 @@ export default function Home() {
                                   <div key={flavor.id} className="flex items-center gap-2 text-xs">
                                     <div className="w-2 h-2 rounded-full bg-red-500" />
                                     <span className="text-gray-300">{flavor.name}</span>
+                                    <span className="text-xs text-red-400">Out of Stock</span>
                                     <button
                                       onClick={() => setSelectedFlavor({ flavor, productName: 'Fogger switch pod' })}
                                       className="text-gray-400 hover:text-blue-400 transition-colors ml-1 flavor-info-icon"
@@ -394,7 +395,6 @@ export default function Home() {
                                         <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                                       </svg>
                                     </button>
-                                    <span className="text-xs text-red-400">Out of Stock</span>
                                   </div>
                                 ))}
                             </div>
@@ -429,6 +429,9 @@ export default function Home() {
                               <div key={flavor.id} className="flex items-center gap-2 text-xs">
                                 <div className={`w-2 h-2 rounded-full ${flavor.in_stock ? 'bg-green-500' : 'bg-red-500'}`} />
                                 <span className="text-gray-300">{flavor.name}</span>
+                                <span className={`text-xs ${flavor.in_stock ? 'text-green-400' : 'text-red-400'}`}>
+                                  {flavor.in_stock ? 'In Stock' : 'Out of Stock'}
+                                </span>
                                 <button
                                   onClick={() => setSelectedFlavor({ flavor, productName: product.name })}
                                   className="text-gray-400 hover:text-blue-400 transition-colors ml-1 flavor-info-icon"
@@ -438,9 +441,6 @@ export default function Home() {
                                     <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                                   </svg>
                                 </button>
-                                <span className={`text-xs ${flavor.in_stock ? 'text-green-400' : 'text-red-400'}`}>
-                                  {flavor.in_stock ? 'In Stock' : 'Out of Stock'}
-                                </span>
                               </div>
                             ))
                           ) : (
