@@ -199,7 +199,9 @@ export default function Home() {
 
         {/* Product Cards */}
         <div className="space-y-6 max-w-screen-sm mx-auto">
-          {products.map((product) => (
+          {products
+            .filter((p) => p.id !== 'pulse_bar_pro')
+            .map((product) => (
             // Skip rendering standalone pod card; it's shown inside the kit card
             product.id === 'fogger_switch_pod' ? null : (
             <div key={product.id} id={`product-${product.id}`} className={`${product.id === 'fogger_switch_pro_kit' ? 'rgb-border-wrap p-[2px]' : product.id === 'pulse_bar_pro' ? 'pulse-bar-pro-border p-[2px]' : ''} rounded-xl`}>
