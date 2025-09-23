@@ -311,44 +311,66 @@ export default function Home() {
                             </div>
                             <h3 className="text-sm font-medium text-gray-300 mt-3 mb-2">Kit Flavors:</h3>
                             <div className="space-y-1">
-                              {/* In stock first */}
-                              {kitFlavors
-                                .filter((f: Flavor) => f.in_stock)
-                                .map((flavor: Flavor) => (
-                                  <div key={flavor.id} className="flex items-center gap-2 text-xs">
-                                    <div className="w-2 h-2 rounded-full bg-green-500" />
-                                    <span className="text-gray-300">{flavor.name}</span>
-                                    <span className="text-xs text-green-400">In Stock</span>
-                                    <button
-                                      onClick={() => setSelectedFlavor({ flavor, productName: 'Fogger switch pro kit' })}
-                                      className="text-gray-400 hover:text-blue-400 transition-colors ml-1 flavor-info-icon"
-                                      aria-label="Flavor info"
-                                    >
-                                      <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                                      </svg>
-                                    </button>
-                                  </div>
-                                ))}
-                              {/* Out of stock */}
-                              {kitFlavors
-                                .filter((f: Flavor) => !f.in_stock)
-                                .map((flavor: Flavor) => (
-                                  <div key={flavor.id} className="flex items-center gap-2 text-xs">
-                                    <div className="w-2 h-2 rounded-full bg-red-500" />
-                                    <span className="text-gray-300">{flavor.name}</span>
-                                    <span className="text-xs text-red-400">Out of Stock</span>
-                                    <button
-                                      onClick={() => setSelectedFlavor({ flavor, productName: 'Fogger switch pro kit' })}
-                                      className="text-gray-400 hover:text-blue-400 transition-colors ml-1 flavor-info-icon"
-                                      aria-label="Flavor info"
-                                    >
-                                      <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                                      </svg>
-                                    </button>
-                                  </div>
-                                ))}
+                              {(() => {
+                                const kitInStock = kitFlavors.filter((f: Flavor) => f.in_stock)
+                                const kitOutOfStock = kitFlavors.filter((f: Flavor) => !f.in_stock)
+                                const kitKey = 'fogger_switch_pro_kit__kit'
+                                const isKitExpanded = !!showOutOfStockMap[kitKey]
+                                return (
+                                  <>
+                                    {kitInStock.map((flavor: Flavor) => (
+                                      <div key={flavor.id} className="flex items-center gap-2 text-xs">
+                                        <div className="w-2 h-2 rounded-full bg-green-500" />
+                                        <span className="text-gray-300">{flavor.name}</span>
+                                        <span className="text-xs text-green-400">In Stock</span>
+                                        <button
+                                          onClick={() => setSelectedFlavor({ flavor, productName: 'Fogger switch pro kit' })}
+                                          className="text-gray-400 hover:text-blue-400 transition-colors ml-1 flavor-info-icon"
+                                          aria-label="Flavor info"
+                                        >
+                                          <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                                          </svg>
+                                        </button>
+                                      </div>
+                                    ))}
+                                    {kitOutOfStock.length > 0 && !isKitExpanded && (
+                                      <button
+                                        onClick={() => setShowOutOfStockMap((prev) => ({ ...prev, [kitKey]: true }))}
+                                        className="mt-2 text-xs bg-gray-800 hover:bg-gray-700 text-gray-200 px-3 py-1 rounded-md"
+                                      >
+                                        View out of stock flavors
+                                      </button>
+                                    )}
+                                    {isKitExpanded && (
+                                      <>
+                                        {kitOutOfStock.map((flavor: Flavor) => (
+                                          <div key={flavor.id} className="flex items-center gap-2 text-xs">
+                                            <div className="w-2 h-2 rounded-full bg-red-500" />
+                                            <span className="text-gray-300">{flavor.name}</span>
+                                            <span className="text-xs text-red-400">Out of Stock</span>
+                                            <button
+                                              onClick={() => setSelectedFlavor({ flavor, productName: 'Fogger switch pro kit' })}
+                                              className="text-gray-400 hover:text-blue-400 transition-colors ml-1 flavor-info-icon"
+                                              aria-label="Flavor info"
+                                            >
+                                              <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                                              </svg>
+                                            </button>
+                                          </div>
+                                        ))}
+                                        <button
+                                          onClick={() => setShowOutOfStockMap((prev) => ({ ...prev, [kitKey]: false }))}
+                                          className="mt-2 text-xs bg-gray-800 hover:bg-gray-700 text-gray-200 px-3 py-1 rounded-md"
+                                        >
+                                          Hide out of stock flavors
+                                        </button>
+                                      </>
+                                    )}
+                                  </>
+                                )
+                              })()}
                             </div>
                           </div>
                           <div>
@@ -367,42 +389,66 @@ export default function Home() {
                             )}
                             <h3 className="text-sm font-medium text-gray-300 mt-3 mb-2">Pod Flavors:</h3>
                             <div className="space-y-1">
-                              {podFlavors
-                                .filter((f: Flavor) => f.in_stock)
-                                .map((flavor: Flavor) => (
-                                  <div key={flavor.id} className="flex items-center gap-2 text-xs">
-                                    <div className="w-2 h-2 rounded-full bg-green-500" />
-                                    <span className="text-gray-300">{flavor.name}</span>
-                                    <span className="text-xs text-green-400">In Stock</span>
-                                    <button
-                                      onClick={() => setSelectedFlavor({ flavor, productName: 'Fogger switch pod' })}
-                                      className="text-gray-400 hover:text-blue-400 transition-colors ml-1 flavor-info-icon"
-                                      aria-label="Flavor info"
-                                    >
-                                      <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                                      </svg>
-                                    </button>
-                                  </div>
-                                ))}
-                              {podFlavors
-                                .filter((f: Flavor) => !f.in_stock)
-                                .map((flavor: Flavor) => (
-                                  <div key={flavor.id} className="flex items-center gap-2 text-xs">
-                                    <div className="w-2 h-2 rounded-full bg-red-500" />
-                                    <span className="text-gray-300">{flavor.name}</span>
-                                    <span className="text-xs text-red-400">Out of Stock</span>
-                                    <button
-                                      onClick={() => setSelectedFlavor({ flavor, productName: 'Fogger switch pod' })}
-                                      className="text-gray-400 hover:text-blue-400 transition-colors ml-1 flavor-info-icon"
-                                      aria-label="Flavor info"
-                                    >
-                                      <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                                      </svg>
-                                    </button>
-                                  </div>
-                                ))}
+                              {(() => {
+                                const podInStock = podFlavors.filter((f: Flavor) => f.in_stock)
+                                const podOutOfStock = podFlavors.filter((f: Flavor) => !f.in_stock)
+                                const podKey = 'fogger_switch_pro_kit__pod'
+                                const isPodExpanded = !!showOutOfStockMap[podKey]
+                                return (
+                                  <>
+                                    {podInStock.map((flavor: Flavor) => (
+                                      <div key={flavor.id} className="flex items-center gap-2 text-xs">
+                                        <div className="w-2 h-2 rounded-full bg-green-500" />
+                                        <span className="text-gray-300">{flavor.name}</span>
+                                        <span className="text-xs text-green-400">In Stock</span>
+                                        <button
+                                          onClick={() => setSelectedFlavor({ flavor, productName: 'Fogger switch pod' })}
+                                          className="text-gray-400 hover:text-blue-400 transition-colors ml-1 flavor-info-icon"
+                                          aria-label="Flavor info"
+                                        >
+                                          <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                                          </svg>
+                                        </button>
+                                      </div>
+                                    ))}
+                                    {podOutOfStock.length > 0 && !isPodExpanded && (
+                                      <button
+                                        onClick={() => setShowOutOfStockMap((prev) => ({ ...prev, [podKey]: true }))}
+                                        className="mt-2 text-xs bg-gray-800 hover:bg-gray-700 text-gray-200 px-3 py-1 rounded-md"
+                                      >
+                                        View out of stock flavors
+                                      </button>
+                                    )}
+                                    {isPodExpanded && (
+                                      <>
+                                        {podOutOfStock.map((flavor: Flavor) => (
+                                          <div key={flavor.id} className="flex items-center gap-2 text-xs">
+                                            <div className="w-2 h-2 rounded-full bg-red-500" />
+                                            <span className="text-gray-300">{flavor.name}</span>
+                                            <span className="text-xs text-red-400">Out of Stock</span>
+                                            <button
+                                              onClick={() => setSelectedFlavor({ flavor, productName: 'Fogger switch pod' })}
+                                              className="text-gray-400 hover:text-blue-400 transition-colors ml-1 flavor-info-icon"
+                                              aria-label="Flavor info"
+                                            >
+                                              <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                                              </svg>
+                                            </button>
+                                          </div>
+                                        ))}
+                                        <button
+                                          onClick={() => setShowOutOfStockMap((prev) => ({ ...prev, [podKey]: false }))}
+                                          className="mt-2 text-xs bg-gray-800 hover:bg-gray-700 text-gray-200 px-3 py-1 rounded-md"
+                                        >
+                                          Hide out of stock flavors
+                                        </button>
+                                      </>
+                                    )}
+                                  </>
+                                )
+                              })()}
                             </div>
                           </div>
                         </div>
