@@ -615,9 +615,7 @@ export const flavorDescriptions: Record<string, Record<string, string>> = {
     'sour wave': 'Wave of sour fruit flavors.',
   },
   
-  viho_supercharge_nicfree: {
-    // Add nicotine-free specific descriptions if needed
-  },
+  // Duplicate removed: viho_supercharge_nicfree was already defined above
   
   pulse_bar_pro: {
     // Flavors coming soon - no descriptions needed yet
