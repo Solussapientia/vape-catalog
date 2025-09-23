@@ -19,6 +19,10 @@ function getImagePath(imageName: string): string {
     'skyview': '/skyview.webp', 
     'pulse_x': '/pulse_x.webp',
     'pulse': '/pulse.webp',
+    // ROMO mappings for robustness
+    'romo': '/3o0gu.webp',
+    'ROMO': '/3o0gu.webp',
+    '3o0gu.webp': '/3o0gu.webp',
     'meloso': '/meloso.webp',
     'RYL': '/RYL.jpg',
     'LTX': '/LTX.webp',
@@ -273,7 +277,7 @@ export default function Home() {
                 {product.id !== 'fogger_switch_pro_kit' ? (
                   <div className="flex flex-col text-center">
                     <p className="text-xl font-semibold text-white mb-1">{product.name}</p>
-                    <p className="text-base text-gray-400 mb-1">{product.id === 'romo' ? 'Comes with 5' : `${product.puffs} puffs`}</p>
+                    <p className="text-base text-gray-400 mb-1">{(product.id === 'romo' || product.name.toLowerCase().includes('romo')) ? 'Comes with 5' : `${product.puffs} puffs`}</p>
                     <p className="text-lg font-medium text-green-400">{product.price}</p>
                     {product.id === 'kumi_six_10000' && (
                       <div className="mt-2 px-3 py-2 text-xs text-red-300 bg-red-500/10 border border-red-500/30 rounded-md inline-flex items-center gap-2 mx-auto">
