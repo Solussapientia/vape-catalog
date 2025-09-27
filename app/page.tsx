@@ -4,6 +4,7 @@ import { Card, CardBody, CardHeader } from '@heroui/react'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { supabase, Product, Flavor } from '../lib/supabase'
+import AddBrandModal from '../components/AddBrandModal'
 import FlavorInfoModal from '../components/FlavorInfoModal'
 
 interface VapeProduct extends Product {
@@ -13,6 +14,10 @@ interface VapeProduct extends Product {
 // Map database image names to actual filenames in public folder
 function getImagePath(imageName: string): string {
   const normalized = (imageName || '').trim()
+  // Pass through full URLs (e.g., Supabase public URLs)
+  if (/^https?:\/\//i.test(normalized)) {
+    return normalized
+  }
   const imageMap: { [key: string]: string } = {
     'ADJUST': '/ADJUST.webp',
     'ria': '/ria.webp',
@@ -56,6 +61,7 @@ export default function Home() {
   const [phoneNumber, setPhoneNumber] = useState('')
   const [notificationStatus, setNotificationStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [selectedFlavor, setSelectedFlavor] = useState<{ flavor: Flavor, productName: string } | null>(null)
+  const [showAddBrand, setShowAddBrand] = useState(false)
   const scrollToProduct = (id: string) => {
     const el = document.getElementById(`product-${id}`)
     if (el) {
@@ -195,10 +201,18 @@ export default function Home() {
     <div className="min-h-screen bg-black text-white">
       <div className="container mx-auto px-4 py-6">
         {/* Header */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-8 relative">
           <h1 className="text-4xl font-bold mb-2 rainbow-title bg-clip-text text-transparent">
             VAPE LIST
           </h1>
+          <div className="absolute right-0 top-0">
+            <button
+              onClick={() => setShowAddBrand(true)}
+              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm"
+            >
+              Add Brand
+            </button>
+          </div>
         </div>
 
         {/* Product Cards */}
@@ -604,6 +618,15 @@ export default function Home() {
         flavorName={selectedFlavor?.flavor.name || ''}
         productName={selectedFlavor?.productName || ''}
         description={selectedFlavor?.flavor.description}
+      />
+
+      {/* Add Brand Modal */}
+      <AddBrandModal
+        isOpen={showAddBrand}
+        onClose={() => setShowAddBrand(false)}
+        onSaved={() => {
+          fetchProducts()
+        }}
       />
     </div>
   )
