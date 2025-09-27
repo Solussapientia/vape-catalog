@@ -30,13 +30,10 @@ create policy "Allow public insert on flavors" on flavors
 --   using (true)
 --   with check (true);
 
--- STORAGE: ensure 'public' bucket exists (safe if already created)
-do $$
-begin
-  if not exists (select 1 from storage.buckets where name = 'public') then
-    perform storage.create_bucket('public', public => true);
-  end if;
-end $$;
+-- STORAGE BUCKET NOTE:
+-- Some Supabase instances do not expose storage.create_bucket() via SQL.
+-- If the block above fails, create the bucket via Dashboard:
+-- Storage -> Create new bucket -> Name: public -> Public: enabled.
 
 -- STORAGE policies for anon read + upload to 'public' bucket
 drop policy if exists "Public Read" on storage.objects;
