@@ -27,7 +27,7 @@ async function run() {
     name: 'UT',
     puffs: '50,000',
     price: '$30 or 2 for $50',
-    image_name: '058hgrv.webp',
+    image_name: 'iug.png',
     // Set just after Fogger so it sorts directly below
     created_at: createdAt
   }
