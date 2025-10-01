@@ -10,8 +10,12 @@ interface VapeProduct extends Product {
   flavors: Flavor[]
 }
 
-// Map database image names to actual filenames in public folder
-function getImagePath(imageName: string): string {
+// Resolve image path from either full URL (image_url) or local mapping (image_name)
+function getImagePath(imageName: string, imageUrl?: string): string {
+  const fromUrl = (imageUrl || '').trim()
+  if (fromUrl && /^https?:\/\//i.test(fromUrl)) {
+    return fromUrl
+  }
   const normalized = (imageName || '').trim()
   // Pass through full URLs (e.g., Supabase public URLs)
   if (/^https?:\/\//i.test(normalized)) {
@@ -271,7 +275,7 @@ export default function Home() {
                     </span>
                   )}
                   <Image
-                    src={getImagePath(product.image_name)}
+                    src={getImagePath(product.image_name, (product as any).image_url)}
                     alt={product.name}
                     fill
                     className="object-cover"

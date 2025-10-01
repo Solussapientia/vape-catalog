@@ -12,6 +12,7 @@ export interface Product {
   puffs: string
   price: string
   image_name: string
+  image_url?: string
   created_at?: string
   updated_at?: string
 }
