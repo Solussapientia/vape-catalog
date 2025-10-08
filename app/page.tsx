@@ -67,6 +67,7 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState('')
   const [matchIds, setMatchIds] = useState<string[]>([])
   const [activeMatchIndex, setActiveMatchIndex] = useState(0)
+  const [searchActive, setSearchActive] = useState(false)
   const scrollToProduct = (id: string) => {
     const el = document.getElementById(`product-${id}`)
     if (el) {
@@ -78,15 +79,21 @@ export default function Home() {
     fetchProducts()
   }, [])
 
-  // Recompute search matches when products or query change
+  // Recompute only if products change while a search is active
   useEffect(() => {
+    if (!searchActive) return
+    runSearch()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [products])
+
+  function runSearch() {
     const q = (searchQuery || '').trim().toLowerCase()
     if (!q) {
       setMatchIds([])
       setActiveMatchIndex(0)
+      setSearchActive(false)
       return
     }
-
     const ids: string[] = []
     for (const p of products) {
       if ((p.name || '').toLowerCase().includes(q)) {
@@ -101,12 +108,12 @@ export default function Home() {
     }
     setMatchIds(ids)
     setActiveMatchIndex(0)
-    // Auto-scroll to first match
+    setSearchActive(true)
     if (ids.length > 0) {
       const el = document.getElementById(ids[0])
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' })
     }
-  }, [products, searchQuery])
+  }
 
   function goToMatch(index: number) {
     if (matchIds.length === 0) return
@@ -122,6 +129,12 @@ export default function Home() {
 
   function onNext() {
     goToMatch(activeMatchIndex + 1)
+  }
+
+  function closeSearch() {
+    setSearchActive(false)
+    setMatchIds([])
+    setActiveMatchIndex(0)
   }
 
   function isActive(elementId: string): boolean {
@@ -270,29 +283,16 @@ export default function Home() {
             <input
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyDown={(e) => { if (e.key === 'Enter') onNext() }}
+              onKeyDown={(e) => { if (e.key === 'Enter') runSearch() }}
               placeholder="Search products or flavors..."
               className="flex-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 text-sm"
             />
             <button
-              onClick={onPrev}
-              disabled={matchIds.length === 0}
-              className="px-3 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed"
-              aria-label="Previous match"
+              onClick={runSearch}
+              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm"
             >
-              ←
+              Search
             </button>
-            <button
-              onClick={onNext}
-              disabled={matchIds.length === 0}
-              className="px-3 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed"
-              aria-label="Next match"
-            >
-              →
-            </button>
-            <span className="text-xs text-gray-400 min-w-[64px] text-right">
-              {matchIds.length > 0 ? `${activeMatchIndex + 1}/${matchIds.length}` : '0/0'}
-            </span>
           </div>
         </div>
 
@@ -647,6 +647,38 @@ export default function Home() {
           ))}
         </div>
       </div>
+
+      {/* Sticky bottom search navigation */}
+      {searchActive && (
+        <div className="fixed bottom-4 left-1/2 -translate-x-1/2 bg-gray-900/95 border border-gray-700 rounded-xl shadow-lg px-3 py-2 flex items-center gap-2 z-50">
+          <button
+            onClick={onPrev}
+            disabled={matchIds.length === 0}
+            className="px-3 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-md text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+            aria-label="Previous match"
+          >
+            ←
+          </button>
+          <button
+            onClick={onNext}
+            disabled={matchIds.length === 0}
+            className="px-3 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-md text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+            aria-label="Next match"
+          >
+            →
+          </button>
+          <span className="text-xs text-gray-300 tabular-nums min-w-[56px] text-center">
+            {matchIds.length > 0 ? `${activeMatchIndex + 1}/${matchIds.length}` : '0/0'}
+          </span>
+          <button
+            onClick={closeSearch}
+            className="ml-1 px-2 py-1 bg-red-600 hover:bg-red-700 text-white rounded-md text-xs"
+            aria-label="Close search"
+          >
+            ×
+          </button>
+        </div>
+      )}
 
       {/* Simplified Notification Modal */}
       {showNotificationModal && (
