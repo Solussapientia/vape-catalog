@@ -64,6 +64,9 @@ export default function Home() {
   const [phoneNumber, setPhoneNumber] = useState('')
   const [notificationStatus, setNotificationStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [selectedFlavor, setSelectedFlavor] = useState<{ flavor: Flavor, productName: string } | null>(null)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [matchIds, setMatchIds] = useState<string[]>([])
+  const [activeMatchIndex, setActiveMatchIndex] = useState(0)
   const scrollToProduct = (id: string) => {
     const el = document.getElementById(`product-${id}`)
     if (el) {
@@ -74,6 +77,62 @@ export default function Home() {
   useEffect(() => {
     fetchProducts()
   }, [])
+
+  // Recompute search matches when products or query change
+  useEffect(() => {
+    const q = (searchQuery || '').trim().toLowerCase()
+    if (!q) {
+      setMatchIds([])
+      setActiveMatchIndex(0)
+      return
+    }
+
+    const ids: string[] = []
+    for (const p of products) {
+      if ((p.name || '').toLowerCase().includes(q)) {
+        ids.push(`product-${p.id}`)
+      }
+      const flvs = Array.isArray((p as any).flavors) ? (p as any).flavors as Flavor[] : []
+      for (const f of flvs) {
+        if ((f.name || '').toLowerCase().includes(q)) {
+          ids.push(`flavor-${f.id}`)
+        }
+      }
+    }
+    setMatchIds(ids)
+    setActiveMatchIndex(0)
+    // Auto-scroll to first match
+    if (ids.length > 0) {
+      const el = document.getElementById(ids[0])
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+  }, [products, searchQuery])
+
+  function goToMatch(index: number) {
+    if (matchIds.length === 0) return
+    const next = ((index % matchIds.length) + matchIds.length) % matchIds.length
+    setActiveMatchIndex(next)
+    const el = document.getElementById(matchIds[next])
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  }
+
+  function onPrev() {
+    goToMatch(activeMatchIndex - 1)
+  }
+
+  function onNext() {
+    goToMatch(activeMatchIndex + 1)
+  }
+
+  function isActive(elementId: string): boolean {
+    return matchIds.length > 0 && matchIds[activeMatchIndex] === elementId
+  }
+
+  function textMatches(text: string): boolean {
+    const q = (searchQuery || '').trim().toLowerCase()
+    if (!q) return false
+    return (text || '').toLowerCase().includes(q)
+  }
 
   async function fetchProducts() {
     try {
@@ -207,6 +266,34 @@ export default function Home() {
           <h1 className="text-4xl font-bold mb-2 rainbow-title bg-clip-text text-transparent">
             VAPE LIST
           </h1>
+          <div className="mt-4 flex items-center gap-2 max-w-screen-sm mx-auto">
+            <input
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => { if (e.key === 'Enter') onNext() }}
+              placeholder="Search products or flavors..."
+              className="flex-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 text-sm"
+            />
+            <button
+              onClick={onPrev}
+              disabled={matchIds.length === 0}
+              className="px-3 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+              aria-label="Previous match"
+            >
+              ←
+            </button>
+            <button
+              onClick={onNext}
+              disabled={matchIds.length === 0}
+              className="px-3 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+              aria-label="Next match"
+            >
+              →
+            </button>
+            <span className="text-xs text-gray-400 min-w-[64px] text-right">
+              {matchIds.length > 0 ? `${activeMatchIndex + 1}/${matchIds.length}` : '0/0'}
+            </span>
+          </div>
         </div>
 
         {/* Product Cards */}
@@ -216,7 +303,7 @@ export default function Home() {
             .map((product) => (
             // Skip rendering standalone pod card; it's shown inside the kit card
             product.id === 'fogger_switch_pod' ? null : (
-            <div key={product.id} id={`product-${product.id}`} className={`${product.id === 'fogger_switch_pro_kit' ? 'rgb-border-wrap p-[2px]' : product.id === 'pulse_bar_pro' ? 'pulse-bar-pro-border p-[2px]' : ''} rounded-xl`}>
+            <div key={product.id} id={`product-${product.id}`} className={`${product.id === 'fogger_switch_pro_kit' ? 'rgb-border-wrap p-[2px]' : product.id === 'pulse_bar_pro' ? 'pulse-bar-pro-border p-[2px]' : ''} rounded-xl ${textMatches(product.name) && isActive(`product-${product.id}`) ? 'ring-2 ring-yellow-400' : ''}`}>
             <Card className={`bg-gray-900 border-gray-800 rounded-xl`}>
               <CardHeader className="flex flex-col gap-4 pb-4">
                 <div className="w-full aspect-square relative border-2 border-gray-600 rounded-lg overflow-hidden bg-gray-800">
@@ -484,9 +571,9 @@ export default function Home() {
 
                       return (
                         <div className="space-y-1">
-                          {inStockFlavors.length > 0 ? (
-                            inStockFlavors.map((flavor: Flavor) => (
-                              <div key={flavor.id} className="flex items-center gap-2 text-xs">
+                            {inStockFlavors.length > 0 ? (
+                              inStockFlavors.map((flavor: Flavor) => (
+                                <div key={flavor.id} id={`flavor-${flavor.id}`} className={`flex items-center gap-2 text-xs ${textMatches(flavor.name) && isActive(`flavor-${flavor.id}`) ? 'bg-yellow-500/10 border border-yellow-400/50 rounded px-1' : ''}`}>
                                 <div className={`w-2 h-2 rounded-full ${flavor.in_stock ? 'bg-green-500' : 'bg-red-500'}`} />
                                 <span className="text-gray-300">{flavor.name}</span>
                                 <span className={`text-xs ${flavor.in_stock ? 'text-green-400' : 'text-red-400'}`}>
