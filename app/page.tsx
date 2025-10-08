@@ -100,7 +100,9 @@ export default function Home() {
         ids.push(`product-${p.id}`)
       }
       const flvs = Array.isArray((p as any).flavors) ? (p as any).flavors as Flavor[] : []
+      // Only include visible rows (in-stock) to avoid jumping to non-rendered items
       for (const f of flvs) {
+        if (!f.in_stock) continue
         if ((f.name || '').toLowerCase().includes(q)) {
           ids.push(`flavor-${f.id}`)
         }
