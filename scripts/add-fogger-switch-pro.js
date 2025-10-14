@@ -48,7 +48,7 @@ async function run() {
       id: 'fogger_switch_pod',
       name: 'Fogger switch pod',
       puffs: '30,000',
-      price: '$15.00',
+      price: '$20.00',
       image_name: 'rfe2v.png',
       created_at: '1989-01-01T00:00:00.000Z',
     }
