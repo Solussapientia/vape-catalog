@@ -26,7 +26,7 @@ async function run() {
     name: 'Geek Bar Pulse X 2',
     puffs: '50,000',
     price: '$35',
-    image_name: '282828.webp',
+    image_name: 'pulse_x_2',
     created_at: createdAt,
   }
 
