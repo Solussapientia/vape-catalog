@@ -365,13 +365,24 @@ export default function Home() {
                       HOT SELLER
                     </span>
                   )}
-                  <Image
-                    src={getImagePath(product.image_name, (product as any).image_url)}
-                    alt={product.name}
-                    fill
-                    unoptimized={product.id === 'pulse_x_2'}
-                    className="object-cover"
-                  />
+                  {product.id === 'pulse_x_2' ? (
+                    // Native img avoids Next/Image optimizer issues; file is in /public/pulse_x_2.webp
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src="/pulse_x_2.webp"
+                      alt={product.name}
+                      className="absolute inset-0 h-full w-full object-cover"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : (
+                    <Image
+                      src={getImagePath(product.image_name, (product as any).image_url)}
+                      alt={product.name}
+                      fill
+                      className="object-cover"
+                    />
+                  )}
                 </div>
                 {/* For Fogger, details render in CardBody; otherwise render standard header details */}
                 {product.id !== 'fogger_switch_pro_kit' ? (
