@@ -26,6 +26,8 @@ function getImagePath(imageName: string, imageUrl?: string): string {
     'ria': '/ria.webp',
     'skyview': '/skyview.webp', 
     'pulse_x': '/pulse_x.webp',
+    'pulse_x_2': '/282828.webp',
+    '282828.webp': '/282828.webp',
     'pulse': '/pulse.webp',
     // ROMO mappings for robustness
     'romo': '/3o0gu.webp',

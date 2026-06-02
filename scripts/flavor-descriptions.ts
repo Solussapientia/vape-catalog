@@ -65,6 +65,15 @@ export const flavorDescriptions: Record<string, Record<string, string>> = {
     'Cherry Lemon Mint': 'Unique cherry lemonade with fresh mint leaves for a sophisticated flavor profile.',
   },
 
+  // Geek Bar Pulse X 2
+  pulse_x_2: {
+    'Watermelon Bull': 'Bold watermelon with an energy-drink style bull kick.',
+    'Strawberry Bull': 'Sweet strawberry paired with a crisp bull finish.',
+    'Blue Razz Bull': 'Blue raspberry tartness with bull-series intensity.',
+    'Peach Bull': 'Juicy peach with a smooth bull-style exhale.',
+    'Coco Berry Bull': 'Coconut and mixed berries with bull-series punch.',
+  },
+
   // Geek Bar Pulse X
   pulse_x: {
     'ATL Mint (Meteor / Patriot Edition)': 'Atlanta-inspired mint blend exclusive to the special edition, with cooling intensity.',
