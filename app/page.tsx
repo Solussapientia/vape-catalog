@@ -28,6 +28,8 @@ function getImagePath(imageName: string, imageUrl?: string): string {
     'pulse_x': '/pulse_x.webp',
     'pulse_x_2': '/pulse_x_2.webp',
     '282828.webp': '/pulse_x_2.webp',
+    'pulse_x_2_25k': '/e2dw.webp',
+    'e2dw.webp': '/e2dw.webp',
     'pulse': '/pulse.webp',
     // ROMO mappings for robustness
     'romo': '/3o0gu.webp',
@@ -365,11 +367,11 @@ export default function Home() {
                       HOT SELLER
                     </span>
                   )}
-                  {product.id === 'pulse_x_2' ? (
-                    // Native img avoids Next/Image optimizer issues; file is in /public/pulse_x_2.webp
+                  {product.id === 'pulse_x_2' || product.id === 'pulse_x_2_25k' ? (
+                    // Native img avoids Next/Image optimizer issues for these local webp assets
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
-                      src="/pulse_x_2.webp"
+                      src={product.id === 'pulse_x_2_25k' ? '/e2dw.webp' : '/pulse_x_2.webp'}
                       alt={product.name}
                       className="absolute inset-0 h-full w-full object-cover"
                       loading="lazy"
